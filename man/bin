@@ -1,0 +1,15 @@
+#===================== ~/bin 里的命令说明
+#网络相关命令
+ipaddr	通过抓取别人的页面，获取给定ip的地理位置
+
+#系统便捷操作
+killps	杀掉当前用记ps后出现的带指定名字的程序
+psc		显示带python字段的进程
+
+#access_log处理命令
+stat_access	统计access日志，每个接口的访问次数，和平均访问时间
+stat_code	统计最后10000个访问中，每个接口的code出现的次数
+stat_head	同stat_access，只是只读取最后一段
+stat_ip		统计某个接口的访问ip，及其访问次数
+stat_min	统计每秒钟的接口访问总次数
+stat_api	将access日志里的访问接口提取出来

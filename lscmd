@@ -1,0 +1,7 @@
+#!/bin/bash
+
+paths=${PATH//:/ }
+
+for path in $paths;do
+	ls $path
+done

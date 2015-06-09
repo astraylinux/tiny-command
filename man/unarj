@@ -1,0 +1,23 @@
+unarj 
+
+1.作用 
+
+unarj解压缩格式为.arj格式的文件，使用权限是所有用户。 
+
+2.格式 
+
+unarj [eltx][.arj压缩文件] 
+
+3.主要参数 
+
+e：解压缩.arj文件。 
+
+l：显示压缩文件内所包含的文件。 
+
+t：检查压缩文件是否正确。 
+
+x：解压缩时保留原有的路径。 
+
+4.说明 
+
+带有.arj扩展名的文件是由用于MS DOS和Windows的ARJ实用程序创建的。因为ARJ是一种不能免费获得源代码的共享件程序，所以在Linux平台上几乎不存在与其功能匹配的工具，要解压缩.arj文件，就要使用unarj实用程序。unarj比ARJ慢，能力也不如ARJ，但至少能够顺利地抽取大多数.arj文件。unarj 只能将文件抽取到当前的工作目录、列出档案内容，或者测试档案。从ARJ Software的站点或携带所需Linux发行版的FTP服务器上可以下载unarj源码。另外，unarj通常是基本Linux发行版的一部分，因此可以在主要发行版本的CD-ROM上找到它。如果需要可到所有Linux发行版链接的列表下载，ARJ软件网址为[www.arjsoft.com]，ARJ的下载页面为[www.arjsoft.com]。unarj最新版本是2.65，注意unarj选项不是以减号(-)开头的。

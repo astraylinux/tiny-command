@@ -1,0 +1,2 @@
+#!/bin/bash
+tail -n 10000 $1|stataccess|head -n 15

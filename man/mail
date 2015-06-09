@@ -1,0 +1,53 @@
+名称：/etc/aliases 
+使用权限：系统管理者 
+使用方式： 请用 newaliases 更新资料库 
+说明： 
+sendmail 会使用一个在 /etc/aliases 中的档案做使用者名称转换的动作。当 sendmail 收到一个要送给 xxx 的信时，它会依据 aliases档的内容送给另一个使用者。这个功能可以创造一个只有在信件系统内才有效的使用者。例如 mailing list 就会用到这个功能，在 mailinglist 中，我们可能会创造一个叫 redlinux@link.ece.uci.edu 的 mailinglist，但实际上并没有一个叫 redlinux 的使用者。实际 aliases 档的内容是将送给这个使用者的信都收给 mailing list 处理程式负责分送的工作。 
+
+/etc/aliases 是一个文字模式的档案，sendmail 需要一个二进位格式的 /etc/aliases.db。newaliases 的功能传是将 /etc/aliases 转换成一个 sendmail 所能了解的资料库。范例： 
+# newaliases 
+
+下面命令会做相同的事， 
+# sendmail -bi 
+
+相关命令: 
+mail, mailq, newaliases, sendmail 
+
+” mail [返回] 
+名称：mail 
+
+使用权限：所有使用者 
+
+
+使用方式：mail [-iInv] [-s subject] [-c cc-addr] [-b bcc-addr] user1 [user 2 ...] 
+
+
+说明： 
+mail 不仅只是一个指令， mail 还是一个电子邮件程式，不过利用 mail 来读信的人应该很少吧！对于系统管理者来说 mail 就很有用，因为管理者可以用 mail 写成 script ，定期寄一些备忘录提醒系统的使用者。 
+
+
+参数： 
+i 忽略 tty 的中断讯号。 (interrupt) 
+I 强迫设成互动模式。 (Interactive) 
+v 列印出讯息，例如送信的地点、状态等等。 (verbose) 
+n 不读入 mail.rc 设定档。 
+s 邮件标题。 
+c cc 邮件地址。 
+b bcc 邮件地址。 
+
+
+范例： 
+
+
+将信件送给一个或以上的电子邮件地址，由于没有加入其他的选项，使用者必须输入标题与信件的内容等。而 user2 没有主机位置，就会送给邮件伺服器的 user2 使用者。 
+
+
+
+mail user1@email.address 
+mail user1@email.address user2 
+
+
+
+将 mail.txt 的内容寄给 user2 同时 cc 给 user1 。如果将这一行指令设成 cronjob 就可以定时将备忘录寄给系统使用者。 
+
+mail -s 标题 -c user1 user2 < mail.txt

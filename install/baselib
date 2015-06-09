@@ -1,0 +1,41 @@
+#!/bin/bash
+
+#使用yum安装，并用rpm检查是否安装成功，不成功就结束程序
+function yum_install(){
+	if [[ ! $logfile ]];then
+		logfile=/dev/null
+	fi
+    yum -y install $1 >>$logfile 2>&1
+    check=`rpm -qa|grep -e "$1-[0-9]"`
+    if [[ ! $check ]];then
+        cat $logfile
+        echo "install $1 failed!"
+        exit
+    fi
+}
+
+function pip_install(){
+	if [[ ! $logfile ]];then
+		logfile=/dev/null
+	fi
+    pip install $1 >>$logfile 2>&1
+    check=`pip list|grep -e "pep8\s\([\d\.]*\)"`
+    if [[ ! $check ]];then
+        cat $logfile
+        echo "install $1 failed!"
+        exit
+    fi
+}
+
+function check_command(){
+	if [[ ! $logfile ]];then
+		logfile=/dev/null
+	fi
+	check=`which $1|grep "no $1 in"`
+	if [[ $check ]];then
+		cat $logfile
+		echo "install $1 failed!"
+		exit
+	fi
+}
+

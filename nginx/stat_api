@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cat $1|awk -F'GET ' '{print $2}'|awk -F' HTTP' '{print $1}'

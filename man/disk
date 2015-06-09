@@ -1,0 +1,521 @@
+LINUX中增加硬盘： 
+
+1、装上硬盘 
+
+IDE和SCSI方法各有不同 
+
+2、让计算机认出硬盘 
+
+IDE和SCSI方法各有不同 
+
+3、分区 
+
+启动Linux，然后给新硬盘分区： 以root身份，执行 fdisk /dev/hdb. 
+
+[主分区，Linux native] 
+
+4、格式化新硬盘 
+
+mke2fs -cv /dev/hdb1 
+
+[详细的输出和检查坏块] 
+
+5、创建一个mount point。 
+
+决定你想把它Mount在那里，并创建这个mount point。 
+
+例如，你想把它作为/mnt/drive2，以root身份执行： 
+
+cd /mnt 
+
+mkdir drive2 
+
+6、测试 
+
+以root身份，执行： mount -t ext2 /dev/hdb1 /mnt/drive2. 如果没有错误信息，cd /mnt/drive2, 然后试着创建一个目录，并创建几个文件。如果可以，那就行了。继续最后的几步。 
+
+7、修改 /etc/fstab. 
+
+把下面的行加到/etc/fstab文件里: 
+
+/dev/hdb1 /mnt/drive2 ext2 defaults 1 1 
+
+8、重新启动，看看新硬盘是否被自动mounts上了。 
+
+Yves Bellefeuille的Hard-Disk-Upgrade miniHOWTO文档包含了一些上面的信息，但大都是针对另外一些不同的情况的。 
+
+Posted by Peak at May 21, 2004 02:19 AM | Comments (0) | TrackBack (0) 
+
+Linux系统命令(磁盘管理) 
+
+sync 
+
+symlinks(symbolic links) 
+
+swapon 
+
+swapoff 
+
+sfdisk 
+
+mpartition 
+mkswap 
+
+mkisofs(make iso file system) 
+
+mkinitrd(make initial ramdisk images) 
+
+mkfs(make file system) 
+
+mkfs.minix 
+
+mke2fs(make ext2 file system) 
+
+mkdosfs(make Dos file system) 
+
+mkbootdisk(make boot disk) 
+
+mformat 
+
+mbadblocks 
+
+losetup(loop setup) 
+
+hdparm(hard disk parameters) 
+
+fsconf(file system configurator) 
+
+fsck(file system check) 
+
+fsck.minix(file system check-minix filesystem) 
+
+fsck.ext2(file system check-second filesystem) 
+
+fdisk 
+
+ext2ed(ext2 file system editor) 
+
+e2fsck(ext2 file system check) 
+
+dd 
+
+cfdisk 
+
+badblocks 
+
+================================== 
+
+
+mpartition 
+
+功能说明：建立或删除MS-DOS的分区。 
+
+语 法：mpartition [-acdfIprv][-b <磁区数>][-h <磁头数>][l <磁区数>][-s <磁区数>][-t <柱面数>][驱动器代号] 
+
+补充说明：mpartition为mtools工具指令，可建立或删除磁盘分区。 
+
+参 数： 
+
+-a 将分区设置为可开机分区。 
+
+-b<磁区数> 建立分区时，指定要从第几个磁区开始建立分区。 
+
+-c 建立分区。 
+
+-d 将分区设置为无法开机的分区。 
+
+-f 强制地修改分区而不管检查时发生的错误信息。 
+
+-h<磁头数> 建立分区时，指定分区的磁头数。 
+
+-I 删除全部的分区。 
+
+-l<磁区数> 建立分区时，指定分区的容量大小，单位为磁区数。 
+
+-p 当要重新建立分区时，显示命令列。 
+
+-r 删除分区。 
+
+-s<磁区数> 建立分区时，指定每个磁轨的磁区数。 
+
+-t<柱面数> 建立分区时，指定分区的柱面数。 
+
+-v 与-p参数一并使用，若没有同时下达修改分区的命令，则显示目前分区的状态。 
+
+mkswap 
+
+功能说明：设置交换区(swap area)。 
+
+语 法：mkswap [-cf][-v0][-v1][设备名称或文件][交换区大小] 
+
+补充说明：mkswap可将磁盘分区或文件设为Linux的交换区。 
+
+参 数： 
+
+-c 建立交换区前，先检查是否有损坏的区块。 
+
+-f 在SPARC电脑上建立交换区时，要加上此参数。 
+
+-v0 建立旧式交换区，此为预设值。 
+
+-v1 建立新式交换区。 
+
+[交换区大小] 指定交换区的大小，单位为1024字节。 
+
+---------------------------------------------- 
+
+mkisofs(make iso file system) 
+
+功能说明：建立ISO 9660映像文件。 
+
+语 法：mkisofs [-adDfhJlLNrRTvz][-print-size][-quiet][-A <应用程序ID>][-abstract <摘要文件>][-b <开机映像文件>][-biblio ][-c <开机文件名称>][-C <盘区编号，磁区编号>][-copyright <版权信息文件>][-hide <目录或文件名>][-hide-joliet <文件或目录名>][-log-file <记录文件>][-m <目录或文件名>][-M <开机映像文件>][-o <映像文件>][-p <数据处理人>][-P <光盘发行人>][-sysid <系统ID >][-V <光盘ID >][-volset <卷册集ID>][-volset-size <光盘总数>][-volset-seqno <卷册序号>][-x <目录>][目录或文件] 
+
+补充说明：mkisofs可将指定的目录与文件做成ISO 9660格式的映像文件，以供刻录光盘。 
+
+参 数： 
+
+-a或--all mkisofs通常不处理备份文件。使用此参数可以把备份文件加到映像文件中。 
+
+-A<应用程序ID>或-appid<应用程序ID> 指定光盘的应用程序ID。 
+
+-abstract<摘要文件> 指定摘要文件的文件名。 
+
+-b<开机映像文件>或-eltorito-boot<开机映像文件> 指定在制作可开机光盘时所需的开机映像文件。 
+
+-biblio 指定ISBN文件的文件名，ISBN文件位于光盘根目录下，记录光盘的ISBN。 
+
+-c<开机文件名称> 制作可开机光盘时，mkisofs会将开机映像文件中的全-eltorito-catalog<开机文件名称>全部内容作成一个文件。 
+
+-C<盘区编号，盘区编号> 将许多节区合成一个映像文件时，必须使用此参数。 
+
+-copyright<版权信息文件> 指定版权信息文件的文件名。 
+
+-d或-omit-period 省略文件后的句号。 
+
+-D或-disable-deep-relocation ISO 9660最多只能处理8层的目录，超过8层的部分，RRIP会自动将它们设置成ISO 9660兼容的格式。使用-D参数可关闭此功能。 
+
+-f或-follow-links 忽略符号连接。 
+
+-h 显示帮助。 
+
+-hide<目录或文件名> 使指定的目录或文件在ISO 9660或Rock RidgeExtensions的系统中隐藏。 
+
+-hide-joliet<目录或文件名> 使指定的目录或文件在Joliet系统中隐藏。 
+
+-J或-joliet 使用Joliet格式的目录与文件名称。 
+
+-l或-full-iso9660-filenames 使用ISO 9660 32字符长度的文件名。 
+
+-L或-allow-leading-dots 允许文件名的第一个字符为句号。 
+
+-log-file<记录文件> 在执行过程中若有错误信息，预设会显示在屏幕上。 
+
+-m<目录或文件名>或-exclude<目录或文件名> 指定的目录或文件名将不会房入映像文件中。 
+
+-M<映像文件>或-prev-session<映像文件> 与指定的映像文件合并。 
+
+-N或-omit-version-number 省略ISO 9660文件中的版本信息。 
+
+-o<映像文件>或-output<映像文件> 指定映像文件的名称。 
+
+-p<数据处理人>或-preparer<数据处理人> 记录光盘的数据处理人。 
+
+-print-size 显示预估的文件系统大小。 
+
+-quiet 执行时不显示任何信息。 
+
+-r或-rational-rock 使用Rock Ridge Extensions，并开放全部文件的读取权限。 
+
+-R或-rock 使用Rock Ridge Extensions。 
+
+-sysid<系统ID> 指定光盘的系统ID。 
+
+-T或-translation-table 建立文件名的转换表，适用于不支持Rock Ridge Extensions的系统上。 
+
+-v或-verbose 执行时显示详细的信息。 
+
+-V<光盘ID>或-volid<光盘ID> 指定光盘的卷册集ID。 
+
+-volset-size<光盘总数> 指定卷册集所包含的光盘张数。 
+
+-volset-seqno<卷册序号> 指定光盘片在卷册集中的编号。 
+
+-x<目录> 指定的目录将不会放入映像文件中。 
+
+-z 建立通透性压缩文件的SUSP记录，此记录目前只在Alpha机器上的Linux有效。 
+
+----------------------------------------- 
+
+mkinitrd(make initial ramdisk images) 
+
+功能说明：建立要载入ramdisk的映像文件。 
+
+语 法：mkinitrd [-fv][--omit-scsi-modules][--version][--preload=<模块名称>][--with=<模块名称>][映像文件][Kernel 版本] 
+
+补充说明：mkinitrd可建立映像文件，以供Linux开机时载入ramdisk。 
+
+参 数： 
+
+-f 若指定的映像问家名称与现有文件重复，则覆盖现有的文件。 
+
+-v 执行时显示详细的信息。 
+
+--omit-scsi-modules 不要载入SCSI模块。 
+
+--preload=<模块名称> 指定要载入的模块。 
+
+--with=<模块名称> 指定要载入的模块。 
+
+--version 显示版本信息。 
+mkfs(make file system) 
+
+功能说明：建立各种文件系统。 
+
+语 法：mkfs [-vV][fs][-f <文件系统类型>][设备名称][区块数] 
+
+补充说明：mkfs本身并不执行建立文件系统的工作，而是去调用相关的程序来执行。 
+
+参 数： 
+
+fs 指定建立文件系统时的参数。 
+
+-t<文件系统类型> 指定要建立何种文件系统。 
+
+-v 显示版本信息与详细的使用方法。 
+
+-V 显示简要的使用方法。 
+
+-------------------------------------------- 
+
+mkfs.minix 
+
+功能说明：建立Minix文件系统。 
+
+语 法：mkfs.minix [-cv][-i ][-l <文件>][-n <文件名长度>][设备名称][区块数] 
+
+补充说明：mkfs.minix可建立Minix文件系统。 
+
+参 数： 
+
+-c 检查是否有损坏的区块。 
+
+-i 指定文件系统的inode总数。 
+
+-l<文件> 从指定的文件中，读取文件系统中损坏区块的信息。 
+
+-n<文件名长度> 指定文件名称长度的上限。 
+
+-v 建立第2版的Minix文件系统。 
+
+--------------------------------------- 
+
+mke2fs(make ext2 file system) 
+
+功能说明：建立ext2文件系统。 
+
+语 法：mke2fs [-cFMqrSvV][-b <区块大小>][-f <不连续区段大小>][-i <字节>][-N ][-l <文件>][-L <标签>][-m <百分比值>][-R=<区块数>][ 设备名称][区块数] 
+
+补充说明：mke2fs可建立Linux的ext2文件系统。 
+
+参 数： 
+
+-b<区块大小> 指定区块大小，单位为字节。 
+
+-c 检查是否有损坏的区块。 
+
+-f<不连续区段大小> 指定不连续区段的大小，单位为字节。 
+
+-F 不管指定的设备为何，强制执行mke2fs。 
+
+-i<字节> 指定"字节/inode"的比例。 
+
+-N 指定要建立的inode数目。 
+
+-l<文件> 从指定的文件中，读取文件西中损坏区块的信息。 
+
+-L<标签> 设置文件系统的标签名称。 
+
+-m<百分比值> 指定给管理员保留区块的比例，预设为5%。 
+
+-M 记录最后一次挂入的目录。 
+
+-q 执行时不显示任何信息。 
+
+-r 指定要建立的ext2文件系统版本。 
+
+-R=<区块数> 设置磁盘阵列参数。 
+
+-S 仅写入superblock与group descriptors，而不更改inode able inode bitmap以及block bitmap。 
+
+-v 执行时显示详细信息。 
+
+-V 显示版本信息。 
+
+-------------------------------------------- 
+
+mkdosfs(make Dos file system) 
+
+功能说明：建立MS-DOS文件系统。 
+
+语 法：mkdosfs [-cv][-f ][-F ][-i <磁盘序号>][-l <文件名>][-m <信息文件>][-n <标签>][-r <根目录项目数>][-s <磁区数>][设备名称][区块数] 
+
+补充说明：mkdosfs可在Linux下，将磁盘格式化为MS-DOS文件系统的格式。 
+
+参 数： 
+
+-c 检查是否有损坏的区块。 
+
+-f 指定FAT的数目，目前支持1与2两种选项。 
+
+-F 指定FAT记录的单位为12或16位。 
+
+-i<磁盘序号> 设置文件系统的磁盘序号。 
+
+-l<文件名> 从指定的文件中，读取文件系统中损坏区块的信息。 
+
+-m<信息文件> 若以次文件系统开机，而却因操作系统没有正常安装，则会显示选项中所指定的信息文件内容。 
+
+-n<标签> 设置文件系统的磁盘标签名称。 
+
+-r<根目录项目数> 设置根目录最多能记载项目数。 
+
+-s<磁区数> 指定每个丛集所包含的磁区数。 
+
+-v 执行时显示详细的信息。 
+
+--------------------------------------------------- 
+
+mkbootdisk(make boot disk) 
+
+功能说明：建立目前系统的启动盘。 
+
+语 法：mkbootdisk [--noprompt][--verbose][--version][--device <设备>][--mkinitrdargs <参数>][kernel 版本] 
+
+补充说明：mkbootdisk可建立目前系统的启动盘。 
+
+参 数： 
+
+--device<设备> 指定设备。 
+
+--mkinitrdargs<参数> 设置mkinitrd的参数。 
+
+--noprompt 不会提示用户插入磁盘。 
+
+--verbose 执行时显示详细的信息。 
+
+--version 显示版本信息。 
+
+----------------------------------------------------- 
+
+mformat 
+
+功能说明：对MS-DOS文件系统的磁盘进行格式化。 
+
+语 法：mformat [-1aCFIKX][-0 <数据传输率>][-2 <磁区数>][-A <数据传输率>][-B <开机区文件>][-c <丛集大小>][-h <磁头数>][-H <隐藏磁区数>][-l <磁盘标签>][-M <磁区大小>][-n <序号>][-r <根目录大小>][-s <磁区数>][-S <磁区大小>][-t <柱面数>][驱动器代号] 
+
+补充说明：mformat为mtools工具指令，模拟MS-DOS的format指令，可将指定的磁盘或硬盘分区格式化为MS-DOS文件系统。 
+
+参 数： 
+
+-0<数据传输率> 指定第0磁轨的数据传输率。 
+
+-1 不使用2M格式。 
+
+-2<磁区数> 指定在第0磁轨的第0个磁头的磁区数，也就是所谓的2M格式。 
+
+-a 指定产生Atari格式的序号。 
+
+-A<数据传输率> 指定第0磁轨以外所有磁轨的数据传输率。 
+
+-B<开机区文件> 从指定的文件来建立开机区。 
+
+-c<丛集大小> 指定丛集大小，单位为磁区。 
+
+-C 建立磁盘MS-DOS文件系统的映像文件。 
+
+-F 以FAT32来格式化磁盘。 
+
+-H<隐藏磁区数> 指定隐藏磁区的数目。 
+
+-I 指定FAT32的frVersion编号。 
+
+-k 尽可能地保留原有的开机区。 
+
+-l<磁盘标签> 指定磁盘标签名称。 
+
+-M<磁区大小> 指定MS-DOS文件系统所使用的磁区大小，预设应该与硬体磁区大小相同，单位为字节。 
+
+-n<序号> 指定序号。 
+
+-r<根目录大小> 指定根目录的大小，单位为磁区。 
+
+-s<磁区数> 指定每一磁轨所包含的磁区数目。 
+
+-S<磁区大小> 指定硬件磁区大小。 
+
+-t<柱面数> 指定柱面数目。 
+
+-X 格式化XDF磁盘。 
+mbadblocks 
+
+功能说明：检查MS-DOS文件系统的磁盘是否有损坏的磁区。 
+
+语 法：mbadblocks [驱动器代号] 
+
+补充说明：mbadblocks为mtools工具指令，可用来扫描MS-DOS文件系统的磁盘驱动器，并标示出损坏的磁区。 
+
+----------------------
+
+
+cfdisk 
+
+功能说明：磁盘分区。 
+
+语 法：cfdisk [-avz][-c <柱面数目>-h <磁头数目>-s <盘区数目>][-P ][外围设备代号] 
+
+补充说明：cfdisk是用来磁盘分区的程序，它十分类似DOS的fdisk，具有互动式操作界面而非传统fdisk的问答式界面，您可以轻易地利用方向键来操控分区操作。 
+
+参 数： 
+
+-a 在程序里不用反白代表选取，而以箭头表示。 
+
+-c<柱面数目> 忽略BIOS的数值，直接指定磁盘的柱面数目。 
+
+-h<磁头数目> 忽略BIOS的数值，直接指定磁盘的磁头数目。 
+
+-P 显示分区表的内容，附加参数"r"会显示整个分区表的详细资料，附加参数"s"会依照磁区的顺序显示相关信息，附加参数"t"则会以磁头，磁区，柱面的方式来显示资料。 
+
+-s<磁区数目> 忽略BIOS的数值，直接指定磁盘的磁区数目。 
+
+-v 显示版本信息。 
+
+-z 不读取现有的分区，直接当作没有分区的新磁盘使用。 
+
+------------------------------------------- 
+
+badblocks 
+
+功能说明：检查磁盘装置中损坏的区块。 
+
+语 法：badblocks [-svw][-b <区块大小>][-o <输出文件>][磁盘装置][磁盘区块数][启始区块] 
+
+补充说明：执行指令时须指定所要检查的磁盘装置，及此装置的磁盘区块数。 
+
+参 数： 
+
+-b<区块大小> 指定磁盘的区块大小，单位为字节。 
+
+-o<输出文件> 将检查的结果写入指定的输出文件。 
+
+-s 在检查时显示进度。 
+
+-v 执行时显示详细的信息。 
+
+-w 在检查时，执行写入测试。 
+
+[磁盘装置] 指定要检查的磁盘装置。 
+
+[磁盘区块数] 指定磁盘装置的区块总数。 
+
+[启始区块] 指定要从哪个区块开始检查。
+

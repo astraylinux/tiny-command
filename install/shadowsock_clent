@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#for ubuntu
+apt-get install python-pip python-dev build-essential
+pip install  pip
+apt-get install python-m2crypto
+apt-get install python-gevent
+pip install shadowsocks

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#安装vim 中文帮助文档
+
+mkdir /tmp/vimcdoc
+cd /tmp/vimcdoc
+
+wget http://res.astraylinux.com/soft/vim/vimcdoc-1.8.0.tar.gz
+tar zxvf vimcdoc-1.8.0.tar.gz
+
+cd vimcdoc-1.8.0/
+./vimcdoc.sh -I
+
+
+echo "========================================================="
+echo "add next line to you .vimrc"
+echo "set helplang=cn"
+

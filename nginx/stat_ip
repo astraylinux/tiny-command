@@ -1,0 +1,6 @@
+#!/bin/bash
+
+t=$(tail -n 1 $1|awk -F':' '{print ($3-1)":"$4}'|awk '{print $1}')
+tail -n 20000 $1|awk -F':' '{if($3":"$4 > t)print $0}' t=$t|grep "$2"|awk '{print $1}'|sort|uniq -c |sort -nr|head -n 50
+tail -n 20000 $1|awk -F':' '{if($3":"$4 > t)print $0}' t=$t|grep "$2"|awk '{print $1}'|wc -l
+

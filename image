@@ -1,0 +1,8 @@
+#!/usr/bin/python
+import sys
+from PIL import Image
+
+
+for path in sys.argv[1:]:
+	img = Image.open(path)
+	print img.mode, img.size

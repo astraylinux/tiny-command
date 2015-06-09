@@ -1,0 +1,36 @@
+” finger [返回] 
+名称： finger 
+使用权限： 所有使用者 
+
+使用方式： finger [options] user[@address] 
+
+说明：finger 可以让使用者查询一些其他使用者的资料。会列出来的资料有： 
+
+Login Name 
+User Name 
+Home directory 
+Shell 
+Login status 
+mail status 
+.plan 
+.project 
+.forward 
+
+其中 .plan ，.project 和 .forward 就是使用者在他的 Home Directory 里的 .plan ， .project 和 .forward 等档案里的资料。如果没有就没有。finger 指令并不限定于在同一伺服器上查询，也可以寻找某一个远端伺服器上的使用者。只要给一个像是 E-mail address 一般的地址即可。 
+把计? 
+
+-l 
+多行显示。 
+
+-s 
+单行显示。这个选项只显示登入名称，真实姓名，终端机名称，闲置时间，登入时间，办公室号码及电话号码。如果所查询的使用者是远端伺服器的使用者，这个选项无效。 
+
+范例：下列指令可以查询本机管理员的资料： 
+finger root 
+
+其结果如下： 
+Login: root Name: root 
+Directory: /root Shell: /bin/bash 
+Never logged in. 
+No mail. 
+No Plan. 

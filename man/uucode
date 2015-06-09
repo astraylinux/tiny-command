@@ -1,0 +1,46 @@
+uudecode 
+
+1.作用 
+
+uudecode命令用来将uuencode编码后的档案还原，uudecode只会将begin与end标记之间的编码资料还原，程序会跳过标记以外的资料。它的使用权限为所有用户。 
+
+2.格式 
+
+uuencode [-hv] [file1 ...] 
+
+3.主要参数 
+
+－h：列出指令使用格式(help)。 
+
+－v：列出版本信息。
+Linux必学的系统安全命令 
+
+虽然Linux和Windows NT/2000系统一样是一个多用户的系统，但是它们之间有不少重要的差别。对于很多习惯了Windows系统的管理员来讲，如何保证Linux操作系统安全、可靠将会面临许多新的挑战。本文将重点介绍Linux系统安全的命令。 
+
+passwd 
+1.作用 
+passwd命令原来修改账户的登陆密码，使用权限是所有用户。 
+2.格式 
+passwd [选项] 账户名称 
+
+
+3.主要参数 
+-l：锁定已经命名的账户名称，只有具备超级用户权限的使用者方可使用。 
+-u：解开账户锁定状态，只有具备超级用户权限的使用者方可使用。 
+-x, --maximum=DAYS：最大密码使用时间（天），只有具备超级用户权限的使用者方可使用。 
+-n, --minimum=DAYS：最小密码使用时间（天），只有具备超级用户权限的使用者方可使用。 
+-d：删除使用者的密码, 只有具备超级用户权限的使用者方可使用。 
+-S：检查指定使用者的密码认证种类, 只有具备超级用户权限的使用者方可使用。 
+
+
+4.应用实例 
+$ passwd 
+Changing password for user cao. 
+Changing password for cao 
+(current) UNIX password: 
+New UNIX password: 
+Retype new UNIX password: 
+passwd: all authentication tokens updated successfully. 
+
+
+从上面可以看到，使用passwd命令需要输入旧的密码，然后再输入两次新密码。

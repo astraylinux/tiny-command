@@ -1,0 +1,49 @@
+#初始化
+git init
+git add .
+git commit -m 'init message'
+git log
+
+#比较和提交
+git diff
+git status
+git commit -a -m
+
+#更正提交信息
+git commit --amend -m "it's wrong"
+
+#删除文件
+rm file
+git add -A .
+git commit -m 'file delete now'
+
+#创建ssh-key
+ssh-keygen -t rsa -C "astraylinux@gmail.com" 
+vim .ssh/config
+
+User git 
+	Hostname ssh.github.com 
+	PreferredAuthentications publickey 
+	IdentityFile ~/.ssh/id_rsa 
+	Port 443
+
+#远程操作github
+#克隆
+git clone ssh://git@github.com/astraylinux/SimpleSpider
+#新建与上传
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin ssh://git@github.com/astraylinux/project.git
+git push -u origin master
+#删除库
+git remote rm origin
+
+#403问题
+一般是没选对协议，我这边用的是ssh-key，就能用https
+edit .git/config 
+[remote "origin"]
+https://MichaelDrogalis@github.com/derekerdmann/lunch_call.git 
+to  
+ssh://git@github.com/derekerdmann/lunch_call.git
+

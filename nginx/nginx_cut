@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+yday=$(date -d "-1 days" +"%Y%m%d")
+cd /data/wwwlog/ikxs/;
+mv access.log old/access_$yday.log
+mv api_access.log old/api_access_$yday.log
+mv apicdn_access.log old/apicdn_access_$yday.log
+mv v2_access.log old/v2_access.log_$yday.log
+nginx -s reload
+cd -

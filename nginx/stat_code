@@ -1,0 +1,4 @@
+#!/bin/bash
+
+len=10000
+tail -n $len $1|awk -F'T /' '{print $2}'|awk '{split($1,lst,"?");a[lst[1]"\t"$3]+=1}END{for(x in a)if(length(x)<20)print x"\t"a[x]}'|sort

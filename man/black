@@ -1,0 +1,100 @@
+#像黑客一样使用linux命令
+#
+==== 小技巧
+grep -l error *.log   #打印出匹配到error的文件的文件名
+
+==== 出错替换：一删 二换 三全变
+1,使用 ^ 删掉多余部分
+% grep fooo /var/log/auth.log
+% ^o
+% grep foo /var/log/auth.log
+
+2,使用 ^old^new 换掉输错或输少的部分
+% cat myflie
+% ^li^il
+% cat myfile
+% ansible vod -m command -a 'uptim'
+% ^im^ime
+% ansible vod -m command -a 'uptime'
+
+3,使用 !:gs/old/new 将 old 全部换成 new
+% ansible nginx -m command -a 'which nginx'
+% !:gs/nginx/squid
+% ansible squid -m command -a 'which squid'
+% ^nginx^squid^:G # zsh
+
+==== 关于历史记录,!!,![?]字符串,![-]数字,!# 
+了解历史记录的大小 % echo $HISTSIZE
+历史记录的保存位置 % echo $HISTFILE
+历史记录的保存大小 % echo $HISTFILESIZE 
+Ctrl + r 逆向搜索历史命令 % (reverse-i-search)`h': history 5
+使用!!执行上一条命令
+使用!foo执行foo开头的命令
+使用!?foo执行包含foo的命令
+使用!n执行第n个命令,!-n倒数第n个命令
+使用!#引用当前行
+通过!$ 得到上一条命令的最后一位参数
+通过!^ 得到上一条命令的第一个参数
+通过!:n得到上一条命令的第n个参数
+通过!:x-y得到上一条命令的从x到y的参数
+通过!:n*得到上一条命令的从n到结尾的参数
+通过!*得到上一条命令的所有参数
+### 以下参数可以是上面的任一个
+用 参数:h 获取路径开头,相当于dirname
+用 参数:t 获取路径结尾,相当于basename
+用 参数:r 获取路径文件名, 参数:e选取扩展名
+用 参数:p 打印命令行
+用 参数:s/old/new 做替换
+用 参数:u 改成大写
+用 参数:l 改成小写
+
+==== 其他技巧
+1.用{}构造字符串
+ mv test.jpg{,.bak}  => mv test.jpg test.jpg.bak
+ cp {a,b}test.php  => cp atest.php btest.php 
+ mkdir a{a..c}  => mkdir aa ab ac
+ touch {01..3}.txt => touch 01.txt 02.txt 03.txt
+ touch {1..10..2}.txt => touch 1.txt 3.txt 5.txt 7.txt 9.txt (最后一个是步进)
+ mkdir -p 2014/{01..12}/{baby,photo}
+
+2.用``或$()做命令替换
+ vim $(grep -l error *.pm)  #打开匹配到error的pm文件
+
+3.用变量保存信息
+ % LOG=/var/log/emerge.log
+ % head $LOG
+ % grep -i compiling $LOG
+
+4,用for .. in ..重复执行命令
+ % for dev in /dev/sd{a..d}
+ > do
+ >   hdparm -t $dev
+ > done
+ 
+ % for font in *.flf
+ > do
+ >   echo $font
+ >   figlet -f $font Linux
+ > done
+
+==== 重要原则
+Type less, accomplish more (少打多做)
+DRY, don't repeat yourself (不要重复你自己)
+Care about your tool (关心你的工具)
+
+==== 扩展 
+Tab 补全
+使用通配符 (* ? [a-z] [0-9])
+用快捷键编辑命令行
+字符串处理
+复合命令 (; && ||)
+
+
+
+
+
+
+
+
+
+

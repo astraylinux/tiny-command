@@ -1,0 +1,5 @@
+#!/bin/bash
+
+if [[ $1 ]];then
+	kill -9 `ps|grep $1|awk '{print $1}'`
+fi

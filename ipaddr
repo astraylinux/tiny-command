@@ -1,0 +1,103 @@
+#!/usr/bin/python
+#coding=utf8
+import urllib2
+import gzip
+import time
+import StringIO
+import sys
+
+def de_gzip(data):
+	"""decomporess data from gzip
+	"""
+	cmps = StringIO.StringIO(data)
+	gzipper = gzip.GzipFile(fileobj=cmps)
+	return gzipper.read()
+
+def html_code(html):
+	pos = 0
+	try:
+		pos = html.index("charset=")
+		if pos == -1:
+			return False
+	except Exception, e:
+		return False
+	offset = html[pos:pos+20].index('"')
+	code = html[pos+8:pos+offset]
+	return code
+
+def html2utf8(html):
+	code = html_code(html)
+	if code:
+		html = html.decode(code, "ignore").encode('utf-8')
+		return html
+	return ""
+
+def get(url, heads={}):
+	fails = 0
+	html = ""
+	code = 200
+	time.sleep(0.05)
+	while True:
+		try:
+			if fails >= 3:
+				code = -1
+				break
+			request = urllib2.Request(url)
+			request.add_header("version", "HTTP/1.1")
+			request.add_header("User-Agent", "Mozilla/5.0 (Windows NT 6.1)\
+					AppleWebKit/537.36 (KHTML,  like Gecko)\
+					Chrome/28.0.1500.72 Safari/537.36")
+			request.add_header("Accept-Encoding", "identity")
+			for key in heads:
+				request.add_header(key, heads[key])
+			res_page = urllib2.urlopen(request, timeout=10)
+			code = res_page.getcode()
+			headerinfo = res_page.info()
+			if ("Content-Length" in headerinfo) and \
+					int(headerinfo['Content-Length']) > 1048576:
+				code = 99
+				html = ""
+			else:
+				html = res_page.read()
+			if "Content-Encoding" in headerinfo and 'gzip' in headerinfo["Content-Encoding"]:
+				html = de_gzip(html)
+			break
+		except Exception, e:
+			print e, fails
+			time.sleep(0.3)
+			fails = fails + 1
+	return (code, html)
+
+url_head = "http://www.ip138.com/ips138.asp?ip="
+def get_ip_addr(ip):
+	url = url_head + ip
+	#print ip, url
+	(code, html) = get(url)
+	if code == 200:
+		html = html2utf8(html)
+		html = html[html.index("<h1>"):html.index("<a href=\"ip_add.asp?ip=")]
+		sp = html.split("li>")
+		if len(sys.argv) > 2:
+			print "========================= ", ip
+		for info in sp[1::2]:
+			print info.replace("</", "")
+	else:
+		print code, len(html)
+
+#============================================= main
+if len(sys.argv) > 1:
+	for ip in sys.argv[1:]:
+		get_ip_addr(ip)
+else:
+	while True:
+		line = sys.stdin.readline().replace("\n", "").replace("\r","")
+		if not line:
+			break
+		if ' ' in line:
+			for ip_addr in line.split(' '):
+				print "========================== ", ip_addr
+				get_ip_addr(ip_addr)
+		else:
+			print "========================== ", line
+			get_ip_addr(line)
+

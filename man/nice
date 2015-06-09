@@ -1,0 +1,40 @@
+名称：nice 
+使用权限：所有使用者 
+
+使用方式：nice [-n adjustment] [-adjustment] [--adjustment=adjustment] [--help] [--version] [command [arg...]] 
+
+说明：以更改过的优先序来执行程式, 如果未指定程式, 则会印出目前的排程优先序, 内定的 adjustment 为 10, 范围为 -20 (最高优先序) 到 19 (最低优先序) 
+
+
+把计? 
+
+-n adjustment, -adjustment, --adjustment=adjustment 皆为将该原有优先序的增加 adjustment 
+--help 显示求助讯息 
+--version 显示版本资讯 
+范例： 
+将 ls 的优先序加 1 并执行 : 
+nice -n 1 ls 
+
+将 ls 的优先序加 10 并执行 : 
+nice ls将 ls 的优先序加 10 并执行 
+
+注意 : 优先序 (priority) 为作业系统用来决定 CPU 分配的参数，Linux 使用『回合制(round-robin)』的演算法来做 CPU 排程，优先序越高，所可能获得的 CPU时间就越多。 
+
+
+名称：renice 
+使用权限：所有使用者 
+
+使用方式：renice priority [[-p] pid ...] [[-g] pgrp ...] [[-u] user ...] 
+
+说明：重新指定一个或多个行程(Process)的优先序(一个或多个将根据所下的参数而定) 
+
+把计? 
+
+-p pid 重新指定行程的 id 为 pid 的行程的优先序 
+-g pgrp 重新指定行程群组(process group)的 id 为 pgrp 的行程 (一个或多个) 的优先序 
+-u user 重新指定行程拥有者为 user 的行程的优先序 
+范例： 
+将行程 id 为 987 及 32 的行程与行程拥有者为 daemon 及 root 的优先序号码加 1 : 
+renice +1 987 -u daemon root -p 32 
+
+注意 : 每一个行程(Process)都有一个唯一的 (unique) id? 

@@ -1,0 +1,123 @@
+#!/usr/bin/python
+#coding=utf8
+import sys
+import urllib2
+import urllib
+import json
+
+url = "http://fanyi.baidu.com/v2transapi"
+HEADER = {"Host":"fanyi.baidu.com", "Cache-Control":"no-cache"}
+
+def help_():
+	print "usage: trans -option content"
+	print "-c	translate to Chinese."
+	print "-e	translate to English."
+
+def post(url, data, heads=None, datatype=True):
+	"""http post
+		data: dictionary struct, key value of the post data
+		heads: dictionaray struct, http head
+		datatype: define the return data
+			True: will return string
+			False: return the http object response
+	"""
+	try:
+		rep_header = {}
+		request = urllib2.Request(url)
+		data = urllib.urlencode(data)
+		if heads:
+			for key in heads:
+				request.add_header(key, heads[key])
+		response = urllib2.urlopen(request, data, timeout=10)
+		code = response.getcode()
+		rhead = response.info()
+		rep_header["code"] = int(code)
+		for key, val in	rhead.items():
+			rep_header[key] = val
+		if datatype:
+			return (rep_header, response.read())
+		return (rep_header, response)
+	except EnvironmentError, msg:
+		#print str(msg)
+		if "404" in str(msg):
+			return ({"code":404}, "")
+		else:
+			return ({"code":-1}, "")
+
+
+def del_space(string):
+	new = ""
+	bef = ""
+	length = len(string)
+	i = 0
+	while i < length:
+		if string[i] == " " and bef == " ":
+			i += 1
+			continue
+		if string[i] == "-":
+			i += 1
+			while string[i] == " ":
+				i += 1
+		new += string[i]
+		bef = string[i]
+		i += 1
+	return new
+
+def trans(post_data, forword):
+	(head, html) = post(url, post_data, HEADER)
+	if not head["code"] == 200:
+		print "post responce", head["code"]
+		exit()
+
+	jset = json.loads(html)
+	if not jset["trans_result"]["status"] == 0:
+		print "trans result statsus error:", jset["trans_result"]["status"]
+		exit()
+	jset["liju_result"] = None
+
+	#print "\n", "="*50
+	result = jset["trans_result"]["data"]
+	trstr = ""
+	for item in result:
+		trstr += item["dst"] + "\n"
+
+	query = data["query"]
+	spq = query.split(".")
+	spt = trstr.split("。")
+	if forword == "2en":
+		spq = query.split("。")
+		spt = trstr.split(".")
+	if len(spq) == len(spt):
+		for i in range(0, len(spq)):
+			print spq[i].strip()
+			print spt[i].strip()
+	else:
+		print query
+		print trstr
+
+
+	if jset["dict_result"]["baike_means"]:
+		print "="*30
+		baike = jset["dict_result"]["baike_means"]
+		print "encyc:", baike["content"]
+		print "elink:", baike["link"]
+
+if __name__ == "__main__":
+	data = {"transtype":"trans", "simple_means_flag":3, "from":"en", "to":"zh"}
+	start = 1
+	fword = "2zh"
+	if sys.argv[1] in ["-c", "-e"]:
+		if sys.argv[1] == "-e":
+			data["from"] = "zh"
+			data["to"] = "en"
+			fword = "2en"
+		start = 2
+
+	word = ""
+	for arg in sys.argv[start:]:
+		word = word + " " + arg
+
+	word = word.replace("\n", "")
+	data["query"] = del_space(word)
+
+	trans(data, fword)

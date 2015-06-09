@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ "$1" = 'stop' ];then
+	pids=`ps ax |grep php-fpm|grep -v grep|awk '{print $1}'`
+	echo $pids
+	kill -9 $pids
+fi
+
+if [ "$1" = 'restart' ];then
+	pids=`ps ax |grep php-fpm|grep -v grep|awk '{print $1}'`
+	echo $pids
+	kill -9 $pids
+	php-fpm
+fi

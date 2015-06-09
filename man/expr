@@ -1,0 +1,28 @@
+名称：expr 
+
+使用权限：所有使用者 
+### 字串长度 
+
+shell>> expr length "this is a test" 
+14 
+
+### 数字商数 
+
+shell>> expr 14 % 9 
+5 
+
+### 从位置处抓取字串 
+
+shell>> expr substr "this is a test" 3 5 
+is is 
+
+### 数字串 only the first character 
+
+shell>> expr index "testforthegame" e 
+2 
+
+### 字串真实重现 
+
+shell>> expr quote thisisatestformela 
+thisisatestformela 
+

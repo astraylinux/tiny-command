@@ -1,0 +1,46 @@
+#!/bin/bash
+
+source baselib
+logfile=/tmp/tinyinstall_shadowsock.log
+py_version=`python -V 2>&1|awk '{print $2}'|awk -F'.' '{print $1"."$2}'`
+easy_installer=easy_install-$py_version
+echo >$logfile
+
+$easy_installer pip >>$logfile 2>&1
+check_command pip
+
+echo "step 1.安装Python-Gevent"
+#为了提高性能Python-Gevent还是必须要安装的
+#由于gevent需要用到libevent和python-devel，所以我们需要现在这个
+yum_install libevent
+yum_install python-devel
+pip_install gevent
+
+echo "step 2.安装M2Crypto"
+#M2Crypto是用于加密的第三库、由于众所周知的一些原因我们还是需要进行加密的
+#否则你的梯子可能不几天就被墙了。
+#首先需要先安装M2Crypto的一些依赖库
+yum_install openssl-devel
+yum_install swig
+pip_install M2Crypto
+
+echo "step 3.安装shadowsock服务端"
+yum_install python-setuptools
+pip_install shadowsocks
+
+
+echo "step 4.创建/etc/shadowsocks.json配置文件"
+echo '{
+    "server":"here is you server ip adress",
+    "server_port":8033,
+    "local_address": "127.0.0.1",
+    "local_port":1080,
+    "password":"here is you password",
+    "timeout":300,
+    "method":"aes-256-cfb",
+    "fast_open": false,
+    "workers": 1
+}' > /etc/shadowsocks.json
+
+vim /etc/shadowsocks.json
+ssserver -c /etc/shadowsocks.json -d start

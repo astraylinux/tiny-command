@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ ! $1 ];then
+	echo "usage:./stop pythonfile"
+	exit
+fi
+
+pid=`ps ax |grep "$1" |grep -v 'grep'|grep -v 'vim' |grep -v 'stop'|awk '{print $1}'`
+echo $pid
+kill -9 $pid
+

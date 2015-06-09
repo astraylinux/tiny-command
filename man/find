@@ -1,0 +1,42 @@
+find 
+
+1.作用 
+
+find命令的作用是在目录中搜索文件，它的使用权限是所有用户。 
+
+2.格式 
+
+find [path][options][expression] 
+
+path指定目录路径，系统从这里开始沿着目录树向下查找文件。它是一个路径列表，相互用空格分离，如果不写path，那么默认为当前目录。 
+
+3.主要参数 
+
+[options]参数： 
+
+－depth：使用深度级别的查找过程方式，在某层指定目录中优先查找文件内容。 
+
+－maxdepth levels：表示至多查找到开始目录的第level层子目录。level是一个非负数，如果level是0的话表示仅在当前目录中查找。 
+
+－mindepth levels：表示至少查找到开始目录的第level层子目录。 
+
+－mount：不在其它文件系统（如Msdos、Vfat等）的目录和文件中查找。 
+
+－version：打印版本。 
+
+[expression]是匹配表达式，是find命令接受的表达式，find命令的所有操作都是针对表达式的。它的参数非常多，这里只介绍一些常用的参数。 
+
+—name：支持统配符*和?。 
+
+－atime n：搜索在过去n天读取过的文件。 
+
+－ctime n：搜索在过去n天修改过的文件。 
+
+－group grpoupname：搜索所有组为grpoupname的文件。 
+
+－user 用户名：搜索所有文件属主为用户名（ID或名称）的文件。 
+
+－size n：搜索文件大小是n个block的文件。 
+
+－print：输出搜索结果，并且打印。 
+

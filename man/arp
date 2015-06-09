@@ -1,0 +1,9 @@
+arpwatch(ARP watcher) 
+功能说明：监听网络上ARP的记录。 
+语　　法：arpwatch [-d][-f<记录文件>][-i<接口>][-r<记录文件>] 
+补充说明：ARP(Address Resolution Protocol)是用来解析IP与网络装置硬件地址的协议。arpwatch可监听区域网络中的ARP数据包并记录，同时将监听到的变化通过E-mail来报告。 
+参　　数： 
+-d 启动排错模式。 
+-f<记录文件> 设置存储ARP记录的文件，预设为/var/arpwatch/arp.dat。 
+-i<接口> 指定监听ARP的接口，预设的接口为eth0。 
+-r<记录文件> 从指定的文件中读取ARP记录，而不是从网络上监听。

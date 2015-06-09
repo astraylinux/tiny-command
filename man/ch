@@ -1,0 +1,42 @@
+名称：chfn 
+
+使用权限：所有使用者 
+
+用法：shell>> chfn 
+
+说明：提供使用者更改个人资讯，用于 finger and mail username 
+
+范例： 
+
+shell>> chfn 
+Changing finger information for user 
+Password: [del] 
+Name[]:Johnney Huang ### 提供 finger 时的资料 
+Office[]:NCCU 
+Office Phone[]: [del] 
+Home Phone[]: [del] 
+
+
+名称：chsh 
+
+使用权限：所有使用者 
+
+用法：shell>> chsh 
+
+说明：更改使用者 shell 设定 
+
+范例： 
+
+shell>> chsh 
+Changing fihanging shell for user1 
+Password: [del] 
+New shell [/bin/tcsh]: ### [是目前使用的 shell] 
+[del] 
+
+shell>> chsh -l ### 展示 /etc/shells 档案内容 
+/bin/bash 
+/bin/sh 
+/bin/ash 
+/bin/bsh 
+/bin/tcsh 
+/bin/csh

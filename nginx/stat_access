@@ -1,0 +1,4 @@
+#!/bin/bash
+
+awk -F"\"" '{split($2,lst," ");url=lst[2];split($0,lst2," ");tt=lst2[length(lst2)];split(url,lst1,"?");a[lst1[1]]+=1;b[lst1[1]]+=tt;}END{for(x in a) print x"\t"a[x]"\t"b[x]/a[x]}'|sort -t'	' +1rg -2
+

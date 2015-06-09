@@ -1,0 +1,17 @@
+#!/bin/bash
+
+read LINE
+data=""
+echo >/tmp/sum_history123123
+while [[ ! -z $LINE ]];do
+	echo $LINE >>/tmp/sum_history123123
+	read LINE
+done
+
+cat /tmp/sum_history123123|awk '{
+		CMD[$2]++;count++;
+	}END{
+		for(a in CMD)
+			print CMD[a]" "CMD[a]/count*100"%\t"a;
+	}'|grep -v "./"|column -c3 -s " " -t|sort -nr|nl
+

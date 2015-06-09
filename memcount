@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#最大内存988
+total=`free -m|grep 'Mem:'|awk '{print $2}'`
+
+all=`free -m |grep "Mem"|awk '{print $4"/"$2"MB"}'`
+rel=`free -m |grep "buffers/cache"|awk '{print $4"/"$3+$4"MB"}'`
+swap=`free -m |grep "Swap"|awk '{print $4"/"$2"MB"}'`
+
+echo "Mem:  $all"
+echo "Rel:  $rel"
+echo "Swap: $swap"
+echo "======================================================="
+#programs="chrome virtualbox eclipse compiz nautilus terminator"
+programs="mysql php-fpm nginx"
+for program in $programs;do
+	echo -n "$program:  "
+	ps aux |grep -i "$program"|grep -v grep|awk '{a+=$4}END{print "\t"a*t/100"MB"}' t=$total
+done
+

@@ -1,0 +1,2 @@
+#ios命令codesign
+显示签名权限: codesign --display --entitlements - ipaname.ipa

@@ -1,0 +1,39 @@
+=`find $dir -type f`; 
+for i in $files 
+	do 
+		dir_name=`dirname $i`; 
+		ori_filename=`basename $i` 
+		new_filename=`echo $ori_filename | tr [:upper:] [:lower:]` > /dev/null; 
+#echo $new_filename; 
+		mv $dir_name/$ori_filename $dir_name/$new_filename 
+		done 
+
+
+### 2.自己试验中...lowercase to uppercase 
+
+tr abcdef...[del] ABCDE...[del] 
+tr a-z A-Z 
+tr [:lower:] [:upper:] 
+
+shell>> echo "this is a test" | tr a-z A-Z > www 
+shell>> cat www 
+THIS IS A TEST 
+
+### 3.去掉不想要的字串 
+
+shell>> tr -d this ### 去掉有关 t.e.s.t 
+this 
+
+man 
+man 
+test 
+e 
+
+### 4.取代字串 
+
+shell>> tr -s "this" "TEST" 
+this 
+TEST 
+th 
+TE 
+

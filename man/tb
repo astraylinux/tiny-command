@@ -1,0 +1,139 @@
+======================================== net 
+DeGzip(data):
+Post(url,data,heads = {},datatype=True):
+Get(url,heads={},timeout=12):
+Get_gzip(url,heads={}):
+InitProxy(proxy_file):
+ProxyPost(url,data,heads = {},datatype=True):
+ProxyGet(url,heads = {},datatype=True):
+DownloadFile(url,local,head=None):
+
+======================================== sql
+def GetCursor(server,db,dict=False,type=0):
+def is_connect(cursor,server,db,dict=False):
+def trans2str(input):
+def GetWhere(data):
+def ExeInsert(cursor,table,data,ignore_key="id",output=False):
+def ExeUpdate(cursor,table,data,where_data,output=False):
+def ExeSelect(cursor,table,keylist,where_data,one=False,output=False):
+def transMysqlRetDict(rows,key,columns=None):
+def isInDatabase(cursor,table,data,division=1,key=None):
+def has_bad_sql(args):
+def data2redis(data,rc,queue,table,type,key,division=1):
+
+======================================== util
+def GetRedisClient(server):
+def GetLogger(logfile,flag,name,formatstr=None,level=logging.INFO):
+def LogConfig(logfile,level=logging.INFO,fmt=None):
+def GetNowDatetime():
+def GetDate(offset=-1):
+def GetTime():
+def Getip():
+def getApkid(sku):
+def GetMd5(string):
+def GetMp3Info(mp3,flag=""):
+def GetMp3Length(mp3):
+def GetMd5Path(md5):
+def GetRandList(alist,num,propertys=[]):
+def GetSortList(key_map,desc=False):
+def SortList4MapItem(List,key,desc=False):
+def List2Str(items,sep):
+def GetRankMap(map,num,desc=False):
+def GetLines(file_name):
+def GetFileMd5(strFile):  
+def DuplicateList(in_list,key=None):
+
+def bin2dec(string_num):
+def hex2dec(string_num):
+def dec2bin(string_num):
+def dec2hex(string_num):
+def hex2bin(string_num):
+def bin2hex(string_num):
+def getUrlmd5i(strmd5):
+
+======================================== thread
+run(datas,func,num,space=1)
+
+======================================== spider
+def replaceCharEntity(htmlstr):
+def filter_tags(htmlstr):
+def html_code(html):
+def html2utf8(html,def_code=None):
+
+======================================== expath
+picker = tb.expath.XPath(url,html)
+ret = picker.pick(xpath_config)
+############xpath配置例子,解析“http://www.23us.com/html/51/51053/”
+#config = {
+#	"bookname":{"key":"""/html/body//h1/text()"""},	#不调用函数处理的
+#	"bookname":{
+#		"key":"""/html/body//h1/text()""",
+#		"remake":[
+#			{"method":"split","argv":[" ","0"]} #分割，取第一个
+#		]
+#	},
+#	"author":{
+#		"key":"""/html/body//h3/text()""",
+#		"remake":[
+#			{"method":"split","argv":["：","1"]},
+#			{"method":"replace","argv":["长孙",""]}, #替换
+#		]
+#	},
+#	"info":{ #提取字典
+#		"type":"dict",
+#		"data":{
+#			"title":{"key":"""/html//title/text()"""},
+#			"css":{
+#				"key":"""/html//link/@href""",
+#				"remake":[
+#					{"method":"re.sub","argv":["\w*.css","test.css"]},  #使用正则替换
+#				]
+#			},
+#			"js":{
+#				"key":"""/html/head/script/@src""",
+#				"not_abs_url":1,	#表示不取url的完整路径
+#				"remake":[
+#					{"method":"re","argv":["\w*.js"]}, #使用正则提取
+#				]
+#			}
+#		}
+#	},
+#	"chapter":{  #提取列表 
+#		"type":"list",
+#		"block":"""/html/body//table[@id="at"]//td""",
+#		"data":{
+#			"name":{"key":"""./a/text()"""},
+#			"url":{"key":"""./a/@href"""},
+#		}
+#	},
+#}
+
+#json提取示例 http://apps.wandoujia.com/api/v1/apps/com.tencent.mtt
+#config = {
+#	"name":{"key":"""/title"""},
+#	"info":{
+#		"type":"dict",
+#		"data":{
+#			"packageName":{"key":"""/apks/0/packageName"""},
+#			"md5":{"key":"""/apks/0/md5"""},
+#			"version":{
+#				"key":"""/apks/0/versionName""",
+#				"remake":[
+#					{"method":"replace","argv":[".","_"]},
+#				]
+#			},
+#		}
+#	},
+#	"chapter":{
+#		"type":"list",
+#		"block":"""/apks/0/securityDetail""",
+#		"data":{
+#			"provider":{"key":"""/provider"""},
+#			"status":{"key":"""/status"""},
+#			"failedInfo":{"key":"""/failedInfo"""},
+#		}
+#	},
+#}
+
+
+

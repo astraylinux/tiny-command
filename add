@@ -1,0 +1,10 @@
+#!/bin/bash
+
+DIR=$TINYPATH
+
+if [[ $1 == "cmd" ]];then
+	vim $DIR/$2
+	chmod a+x $DIR/$2
+else
+	vim $DIR/man/$1
+fi

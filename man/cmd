@@ -1,0 +1,207 @@
+各种查看：
+du		显示目录或文件的大小
+od　　　以八进制的字码输出文件内容
+cksum	显示文件的标示符与文件大小
+arch　　　　　　输出机器的结构
+blkid　　　　　　显示设备的UUID
+blockdev　　　　读取block设备信息
+dircolors　　　　显示或修改使用ls时的颜色
+dirname　　　　显示当前路径下的目录名
+fgrep　　　　　　查找文件中的特定字符串
+file　　　　　　　显示文件的类型
+finger　　　　　查询远程主机上的用户信息
+fuser　　　　　　通过文件或sockets来确认进程
+groups　　　　　显示用户所属的组
+help　　　　　　shell内置命令说明
+host　　　　　　查询主机使用的域名
+hostid　　　　　显示主机id
+hostname　　　显示及设置主机名
+last　　　　　　显示曾登录的用户
+lastb　　　　　显示登录失败的用户
+ldd　　　　　　输出与运行文件有关的函数库
+logname　　　　输出登录者的用户名
+lsattr　　　　　输出ext２或ext３系统中文件的属性
+lsmod　　　　　输出核心模块使用的状态
+lsusb　　　　　输出所有的usb设备
+manpath　　　显示命令说明的搜索目录
+modinfo　　　　显示核心模块的信息
+nslookup　　　查询DNS服务器的运行
+pgrep　　　　　按照PID显示进程
+pmap　　　　　显示进程的内存对应
+stat　　　　　　显示文件或文件系统的状态
+uptime　　　　显示系统已运行的时间
+whatis　　　　显示命令的功能介绍
+which　　　　查找指定文件
+whoami　　　显示用户名称
+
+实用工具：
+bc
+batch
+csplit
+eject
+gpasswd
+gpm
+lynx
+makemap
+md5sum
+mutt
+ncftp
+screen
+split
+watch
+write
+
+系统功能：
+at , atq ,atrm
+bg
+cfdisk
+chacl
+chage
+chattr
+chkconfig
+chroot
+chsh
+debugfs
+dmesg
+dump
+e2label
+emerge
+fg
+grpconv 
+grpunconv
+hash
+hdparm
+hwclock
+insmod
+jobs
+lilo
+logrotate
+lp
+lpq
+lprm
+mkdir
+mkbootdisk
+mkfs.*
+mkraid
+mkswap
+modprobe
+nice
+renice
+nohup
+pkill
+raidstart
+raidstop 
+resize2fs
+restore
+rmmod
+showmount
+sln
+suspend
+swapoff
+swapon
+sync
+sysctl
+telinit
+tune2fs
+ulimit
+umask
+vlock
+vmstat
+xauth
+xhost
+xset
+
+Shell:
+declare
+enable
+export
+fc
+logsave
+mesg
+tee
+wall
+
+网络功能：
+arpwatch
+htpasswd
+httpd
+ipcrm
+ipcs
+mail
+mailstats
+mailq
+rcp
+rlogin
+rsh
+ssh
+scp
+slogin
+smbpasswd
+smbstatus
+tcpdump
+tftp
+wget
+
+文本处理：
+col
+colrm
+fold
+iconv
+join
+paste
+pg
+sed
+tac
+tr
+tracepath
+traceroute
+uniq
+
+大程序命令：
+压缩：
+bunzip2
+bzgrep
+bzip2
+bzcat
+bzip2recover
+bzless
+bzmore
+gunzip
+gzexe
+gzip
+uncompress
+zcat
+zgrep
+zipgrep
+zipinfo
+zless
+znew
+
+SELinux:
+chcon
+fixfiles
+getsebool
+setenforce
+setsebool
+
+Quota:
+edquota
+quota
+quotacheck
+quotaoff
+quotaon
+quotastats
+repquota
+
+FTP:
+ftp
+ftpcount
+ftpshut
+ftpwho
+
+Postfix:
+postfix
+postalias
+postmap
+postqueue
+postsuper

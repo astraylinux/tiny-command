@@ -1,0 +1,50 @@
+名称：split 
+使用权限：所有使用者 
+
+使用方式：split [OPTION] [INPUT [PREFIX]] 
+
+说明： 
+
+将一个档案分割成数个。而从 INPUT 分割输出成固定大小的档案，其档名依序为 PREFIXaa, PREFIXab...；PREFIX 预设值为 `x。若没有 INPUT 档或为 `-，则从标准输入读进资料。 
+
+匡兜? 
+
+-b, --bytes=SIZE 
+
+SIZE 值为每一输出档案的大小，单位为 byte。 
+-C, --line-bytes=SIZE 
+
+每一输出档中，单行的最大 byte 数。 
+-l, --lines=NUMBER 
+
+NUMBER 值为每一输出档的列数大小。 
+-NUMBER 
+
+与 -l NUMBER 相同。 
+--verbose 
+
+于每个输出档被开启前，列印出侦错资讯到标准错误输出。 
+--help 
+
+显示辅助资讯然后离开。 
+--version 
+
+列出版本资讯然后离开。 
+SIZE 可加入单位: b 代表 512， k 代表 1K， m 代表 1 Meg。 
+
+范例： 
+
+PostgresSQL 大型资料库备份与回存： 
+
+因 Postgres 允许表格大过你系统档案的最大容量，所以要将表格 dump 到单一的档案可能会有问题，使用 split进行档案分割。 
+
+
+% pg_dump dbname | split -b 1m - filename.dump. 
+
+
+
+重新载入 
+
+
+% createdb dbname 
+% cat filename.dump.* | pgsql dbname 

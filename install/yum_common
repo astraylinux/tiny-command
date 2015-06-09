@@ -1,0 +1,62 @@
+#!/bin/bash
+
+source ./baselib
+
+#务器常用软件安装脚本
+set -e
+
+############ Basic: System ##############
+yum_install epel-release                   # 添加EPEL Repo
+yum_update                                 # 更新系统
+
+
+############ Basic: Runtime ##############
+yum_install gcc                            # 安装C编译器
+yum_install gcc-c++                        # 安装C++编译器
+yum_install gcc-gfortran                   # 安装Fortran编译器
+yum_install compat-gcc-44                  # 兼容gcc 4.4
+yum_install compat-gcc-44-c++              # 兼容gcc-c++ 4.4
+
+yum_install make                           # 安装make
+yum_install gdb                            # 安装gdb代码调试器
+yum_install cmake                          # 安装cmake
+yum_install git                            # 安装git版本控制
+
+
+############ Basic: Tools ################
+yum_install p7zip                          # 安装对7z和zip的支持
+yum_install lrzsz                          # 安装对sz和rz的支持
+yum_install zsh                            # 安装zsh
+chsh -s $(which zsh)                       # 将zsh设置为默认shell
+yum_install autojump                       # 安装autojump
+yum_install autojump-zsh                   # 安装autojump对zsh的支持
+
+
+############ Advanced: Java ##############
+yum_install java                           # 安装Java运行环境
+
+
+########### Advanced: Python #############
+yum_install python-pip                     # 安装Python库安装工具pip
+yum_install python-matplotlib              # 安装matplotlib会图库
+yum_install numpy                          # 安装numpy数组操作库
+yum_install scipy                          # 安装scipy科学计算库
+yum_install python-requests                # 安装requests网页请求库
+yum_install python-lxml                    # 安装lxml网页解析库
+yum_install python-beautifulsoup4          # 安装BeautifulSoup网页解析库
+yum_install python-docopt                  # 安装docopt命令行解析库
+yum_install python-argparse                # 安装argparse命令行解析库
+yum_install ipython                        # 安装iPython运行环境
+
+
+########### Advanced: PHP ################
+yum_install php                            # 安装PHP
+yum_install php-mysql                      # 安装MySQL的PHP支持
+yum_install php-fpm                        # 安装php-fpm
+yum_install php-redis                      # 安装Redis的PHP支持
+
+
+############ Advanced: Tools #############
+yum_install httpd                          # 安装Apache服务器
+yum_install redis                          # 安装Redis
+yum_install mysql-server                   # 安装MySQL服务器

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ ! $1 -o ! $2 ];then
+	echo "useage: ./run type pythoncode.py"
+	exit 1
+fi 
+
+nohup python -B $1 $2 1>>/tmp/$1$2 2>&1 &
+rm ./*.pyc
