@@ -6,7 +6,7 @@ if [[ $1 ]];then
 	./$1 install
 else
 	cd $TINYPATH/install
-	cat README.md
+	ls 
 fi
 
 

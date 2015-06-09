@@ -15,3 +15,6 @@ make install
 echo "======================================================================="
 echo "add next line to you .bashrc or delete old vim and create a soft link"
 echo "alias vim='/usr/local/vim/bin/vim'"
+
+cd ../
+rm -rf vim73 vim-7.3.tar.bz2

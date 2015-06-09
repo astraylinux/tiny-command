@@ -1,0 +1,20 @@
+#!/bin/bash
+
+path=`pwd`
+
+echo "#!/bin/bash
+#enviroment config
+
+TINYPATH=\$path
+PATH=\$PATH:\$TINYPATH:\$TINYPATH/nginx:
+
+export TINYPATH
+export PATH
+"> tinybashrc
+
+check=`cat ~/.bashrc|grep tinybashrc`
+if [[ ! $check ]];then
+	echo "#tiny command. by astraylinux" >>~/.bashrc
+	echo "source $path/tinybashrc" >>~/.bashrc
+fi
+

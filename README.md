@@ -1,5 +1,6 @@
 #Some tiny command I write
 All simple, but useful
+Use `sudo -E` instead `sudo`
 
 ##add && cmd
 It's my hobit, write some document at TINYPATH/man, and use cmd to read
