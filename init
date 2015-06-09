@@ -5,7 +5,7 @@ path=`pwd`
 echo "#!/bin/bash
 #enviroment config
 
-TINYPATH=\$path
+TINYPATH=$path
 PATH=\$PATH:\$TINYPATH:\$TINYPATH/nginx:
 
 export TINYPATH
