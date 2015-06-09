@@ -1,5 +1,6 @@
 #Some tiny command I write
-All simple, but useful
+All simple, but useful.
+`./init` to init tiny command.
 Use `sudo -E` instead `sudo`
 
 ##add && cmd
