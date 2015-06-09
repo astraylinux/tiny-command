@@ -90,16 +90,16 @@ tinyinstall 'script name'
 ```
 script list:
 
-###yum_common
+####yum_common
 Install some softs that common use at centos server.
 
-###shadowsock
+####shadowsock
 An useful proxy soft, can run at windows, osx, linux, android, ios. This is linux server.
 Generally, you can't install through apt-get or yum.
 
-###vim7x
+####vim7x
 vim7.x, in China, "ftp.vim.org" always can't touch, I put it on my server.
 
-###vimcdoc
+####vimcdoc
 安装vim中文文档，查帮助的时候比较容易看懂.
 
