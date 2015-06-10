@@ -1,0 +1,6 @@
+#!/usr/bin/python
+#coding=utf-8
+import os
+
+path = str(os.__file__)
+print path.replace(path.split("/")[-1],"")

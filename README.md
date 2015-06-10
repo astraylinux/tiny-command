@@ -3,6 +3,11 @@ All simple, but useful.
 `./init` to init tiny command.
 Use `sudo -E` instead `sudo`
 
+##pypath
+Get the main path of python
+
+---
+
 ##add && cmd
 It's my hobit, write some document at TINYPATH/man, and use cmd to read
 ```bash

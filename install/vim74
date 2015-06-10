@@ -7,7 +7,11 @@ tar jxvf vim-7.4.tar.bz2
 
 cd vim74/
 #--enable-multibyte开启多字符编码，必选，不然VIM中文乱码。
-./configure --prefix=/usr/local/vim --enable-multibyte
+#支持python, 可以用来装python调试工具
+pypath=`pypath`
+pypath="$pypath/config"
+./configure --prefix=/usr/local/vim --enable-multibyte --enable-pythoninterp --with-python-config-dir=$pypath
+
 
 make
 make install
@@ -17,4 +21,4 @@ echo "add next line to you .bashrc or delete old vim and create a soft link"
 echo "alias vim='/usr/local/vim/bin/vim'"
 
 cd ../
-rm -rf vim74 vim-7.4.tar.bz2
+rm -rf vim74 vim-7.4.tar.bz2*
