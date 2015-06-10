@@ -1,8 +1,8 @@
 #!/bin/bash
 #enviroment config
 
-TINYPATH=$path
-PATH=$PATH:$TINYPATH:$TINYPATH/nginx:
+TINYPATH=/root/bin
+PATH=$PATH:$TINYPATH:$TINYPATH/nginx:$TINYPATH/third-party/kprdbg:
 
 export TINYPATH
 export PATH
