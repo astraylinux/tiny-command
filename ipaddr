@@ -6,6 +6,9 @@ import time
 import StringIO
 import sys
 
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 def de_gzip(data):
 	"""decomporess data from gzip
 	"""

@@ -5,6 +5,9 @@ import urllib2
 import urllib
 import json
 
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 url = "http://fanyi.baidu.com/v2transapi"
 HEADER = {"Host":"fanyi.baidu.com", "Cache-Control":"no-cache"}
 
@@ -101,6 +104,15 @@ def trans(post_data, forword):
 		baike = jset["dict_result"]["baike_means"]
 		print "encyc:", baike["content"]
 		print "elink:", baike["link"]
+
+	#try:
+	#	print json.dumps(jset, indent=4)
+	#	#means = jset["dict_result"]["simple_means"]["symbols"][0]["parts"][0]["means"]
+	#	#for mean in means:
+	#	#	print mean["word_mean"]
+	#except IOError:
+	#	pass
+
 
 if __name__ == "__main__":
 	data = {"transtype":"trans", "simple_means_flag":3, "from":"en", "to":"zh"}

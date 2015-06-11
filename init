@@ -14,6 +14,7 @@ export PATH
 
 check=`cat ~/.bashrc|grep tinybashrc`
 if [[ ! $check ]];then
+	echo "" >>~/.bashrc
 	echo "#tiny command. by astraylinux" >>~/.bashrc
 	echo "source $path/tinybashrc" >>~/.bashrc
 fi
