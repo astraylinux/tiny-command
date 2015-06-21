@@ -12,7 +12,7 @@ echo "Rel:  $rel"
 echo "Swap: $swap"
 echo "======================================================="
 #programs="chrome virtualbox eclipse compiz nautilus terminator"
-programs="mysql php-fpm nginx"
+programs="mysql php-fpm nginx mongod vim"
 for program in $programs;do
 	echo -n "$program:  "
 	ps aux |grep -i "$program"|grep -v grep|awk '{a+=$4}END{print "\t"a*t/100"MB"}' t=$total
