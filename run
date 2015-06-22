@@ -5,5 +5,7 @@ if [ ! $1 -o ! $2 ];then
 	exit 1
 fi
 
-nohup python -B $1 $2 1>>/tmp/$1$2.output 2>&1 &
+path=`pwd`
+
+nohup python -B $path/$1 $2 1>>/tmp/$1$2.output 2>&1 &
 rm ./*.pyc
