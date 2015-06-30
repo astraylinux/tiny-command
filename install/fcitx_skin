@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+cd /tmp
+wget http://res.astraylinux.com/extend/fcitx_skin.tar.gz
+tar -xzf fcitx_skin.tar.gz
+cd fcitx_skin
+./install.sh
+cd ..
+rm -rf fcitx_skin*
