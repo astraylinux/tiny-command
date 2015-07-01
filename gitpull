@@ -1,0 +1,9 @@
+#!/bin/bash
+
+projects=("k-vim" "pylib" "spiderlib" "study" "tiny-command" "vim-pkg")
+
+for project in ${projects[@]};do
+	echo "======================================== ~/git/$project"
+	cd ~/git/$project
+	git pull origin master
+done
