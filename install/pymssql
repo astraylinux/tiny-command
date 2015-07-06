@@ -1,0 +1,12 @@
+#!/bin/bash
+
+os=$(osname)
+
+
+if [[ $os == "CentOs" ]];then
+	yum install freetds-devel
+	installer=$(ls /usr/bin/easy_install-*|head -n 1)
+	$installer pymssql
+elif [[ $os == "Ubuntu" ]];then
+	apt-get install python-pymssql
+fi
