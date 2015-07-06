@@ -1,7 +1,7 @@
 #!/bin/bash
 #enviroment config
 
-TINYPATH=/root/git/tiny-command
+TINYPATH=/home/astray/git/tiny-command
 PATH=$PATH:$TINYPATH:$TINYPATH/nginx:$TINYPATH/third-party/kprdbg:
 
 export TINYPATH

@@ -1,0 +1,52 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+import sys
+import time
+import pylib
+
+pick_config = {
+	"part":{
+		"type":"list",
+		"block":"""/html/body//table[@id="table1"]//a""",
+		"data":{
+			"name":{"key":"""./text()"""},
+			"url":{"key":"""./@href"""},
+		}
+	}
+}
+
+baidu_config = {
+	"url":{"key":"""/html/body/div/div//input[1]/@value"""}
+}
+
+url = sys.argv[1]
+
+(header, html) = pylib.net.get(url)
+if header["code"] != 200:
+	print pylib.util.json_dump(header)
+	print html
+	exit()
+
+picker = pylib.expath.XPath(url, html.lower(), code="gb2312")
+ret = picker.pick(pick_config)
+
+for item in ret:
+	time.sleep(2)
+	(header, html) = pylib.net.get(item["url"])
+	if header["code"] != 200:
+		print "ERROR", header["code"], item["name"]
+
+	picker = pylib.expath.XPath(item["url"], html, code="gb2312")
+	bdy_url = picker.pick(baidu_config)
+	print item["name"], bdy_url["url"]
+
+
+
+
+
+
+
+
+
+
