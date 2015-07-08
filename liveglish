@@ -17,7 +17,7 @@ pick_config = {
 }
 
 baidu_config = {
-	"url":{"key":"""/html/body/div[@align="center"]/div[@align="center"]//input[1]/@value"""}
+	"url":{"key":"""/html/body//input[1]/@value"""}
 }
 
 url = sys.argv[1]
@@ -30,6 +30,7 @@ if header["code"] != 200:
 
 picker = pylib.expath.XPath(url, html.lower(), code="gb2312")
 ret = picker.pick(pick_config)
+print "get :", len(ret)
 
 for item in ret:
 	time.sleep(2)
