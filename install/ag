@@ -1,0 +1,20 @@
+#!/bin/bash
+
+yum install  -y pcre-devel xz-devel
+
+cd /usr/local/src
+
+wget https://github.com/ggreer/the_silver_searcher/archive/master.zip
+
+unzip master.zip
+
+cd the_silver_searcher-master
+
+./build.sh
+
+make install
+
+which ag
+
+cd ../
+rm -rf master.zip the_silver_searcher-master
