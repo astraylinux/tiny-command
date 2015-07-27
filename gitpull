@@ -3,7 +3,10 @@
 projects=("k-vim" "pylib" "spiderlib" "study" "tiny-command" "vim-pkg")
 
 for project in ${projects[@]};do
-	echo "======================================== ~/git/$project"
-	cd ~/git/$project
-	git pull origin master
+	if [[ -d ~/git/$project ]];then
+		echo "======================================== ~/git/$project"
+		cd ~/git/$project
+		git pull origin master
+		echo ""
+	fi
 done

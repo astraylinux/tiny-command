@@ -2,7 +2,7 @@
 src=$1
 backup=$2
 
-rsync -lr --include="*/" --include="*.py" --include="*.sh" --include="*.conf" --include="*.etc"  --include="*.c" --include="*.cpp" --include="*.h" --include="*/bin/*" --include="*.so" --include="*.a" --include="*.css" --include="*.ini" --include="*.php" --include="*.html" --include="*.js" --exclude="*" $src $backup
+rsync -lr --include="*/" --include="*.py" --include="*.sh" --include="*.conf" --include="*.etc"  --include="*.c" --include="*.cpp" --include="*.h" --include="*/bin/*" --include="*.so" --include="*.a" --include="*.css" --include="*.ini" --include="*.php" --include="*.html" --include="*.js" --include="*.xml" --exclude="*" $src $backup
 exit 1
 
 
