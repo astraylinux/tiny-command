@@ -1,0 +1,54 @@
+#!/usr/bin/env python
+# encoding: utf-8
+import sys
+import os
+from pylib import expath, net, spider
+
+url = sys.argv[1]
+path = sys.argv[2]
+
+if path[-1] == "/":
+	path = path[:-1]
+
+
+link_config = {\
+    "links":{\
+        "type":"list", \
+        "block":"//*", \
+        "data":{\
+            "link":{"key":"./@href|./@src"}\
+        }\
+    }\
+}
+
+(header, html) = net.get(url)
+
+if header["code"] != 200:
+	print >>sys.stderr, "get error."
+	exit(1)
+
+charset = spider.html_charset(html)
+xpath = expath.XPath(url, html, code=charset)
+links = xpath.pick(link_config)
+
+domain = url.split("/")[2]
+for link in links:
+	link = link["link"]
+	if not link:
+		continue
+	pieces = link.split("/")
+	if domain == pieces[2]:
+		if not "." in pieces[-1] or len(pieces) < 4:
+			continue
+		if "?" in link:
+			link = link.split("?")[0]
+		pieces = link.split("/")
+		sub_path = link.split(domain)[-1].replace(pieces[-1], "")[1:]
+		if not sub_path:
+			continue
+		if not os.path.exists(sub_path):
+			os.system("mkdir -p " + path + "/" + sub_path)
+
+		target = path + "/" + sub_path + pieces[-1]
+		ret = net.download_file(link, target)
+		print ret, target
