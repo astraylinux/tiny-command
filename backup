@@ -1,0 +1,27 @@
+#!/bin/bash
+src=$1
+backup=$2
+
+rsync -lr --include="*/" --include="*.py" --include="*.sh" --include="*.conf" --include="*.etc"  --include="*.c" --include="*.cpp" --include="*.h" --include="*/bin/*" --include="*.so" --include="*.a" --include="*.css" --include="*.ini" --include="*.php" --include="*.html" --include="*.js" --include="*.xml" --exclude="*" $src $backup
+exit 1
+
+
+#方法2 (同步空目录)
+rsync --list-only -lr --include="*/" --include="*.py" --include="*.sh" --include="*.conf" --include="*.etc"  --exclude="*" $src $backup | grep -v -E "tmp|back|bak" | awk '{print $5}' > back.list
+rsync --files-from=back.list $src $backup
+exit 1
+
+
+#方法1 (只同步需要的文件)
+dir="$1"
+echo $dir
+find $dir -name "*.py" > back.file
+find $dir -name "*.sh" >> back.file
+find $dir -name "*.conf" >> back.file
+grep -v -E "tmp|back|bak" back.file > back.file.1
+mv -f back.file.1 back.file
+#exit 1
+rsync --list-only --no-R --files-from=back.file  $src $backup
+exit 1
+#rsync --list-only -arv --include-from=back.file --exclude="*" /data/search/ backup/
+
