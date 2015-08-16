@@ -1,0 +1,21 @@
+#!/bin/bash
+
+config_file=/sys/class/backlight/intel_backlight/brightness
+
+now=`cat $config_file`
+
+if [[ $1 == "up" ]];then
+	if [[ $now -gt 750 ]];then
+		echo "too light: $now"
+		exit
+	fi
+	new=`expr $now + 50`
+	echo $new >$config_file
+elif [[ $1 == "down" ]];then
+	if [[ $now -lt 100 ]];then
+		echo "too dark: $now"
+		exit
+	fi
+	new=`expr $now - 50`
+	echo $new >$config_file
+fi

@@ -36,6 +36,7 @@ for link in links:
 	link = link["link"]
 	if not link:
 		continue
+	print link
 	pieces = link.split("/")
 	if domain == pieces[2]:
 		if not "." in pieces[-1] or len(pieces) < 4:
@@ -45,10 +46,9 @@ for link in links:
 		pieces = link.split("/")
 		sub_path = link.split(domain)[-1].replace(pieces[-1], "")[1:]
 		if not sub_path:
-			continue
+			sub_path = ""
 		if not os.path.exists(sub_path):
 			os.system("mkdir -p " + path + "/" + sub_path)
-
 		target = path + "/" + sub_path + pieces[-1]
 		ret = net.download_file(link, target)
 		print ret, target
