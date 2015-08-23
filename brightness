@@ -2,20 +2,24 @@
 
 config_file=/sys/class/backlight/intel_backlight/brightness
 
+step=50
 now=`cat $config_file`
+#if [[ $now -lt 51 ]];then
+#	step=25
+#fi
 
 if [[ $1 == "up" ]];then
-	if [[ $now -gt 750 ]];then
+	if [[ $now -gt 650 ]];then
 		echo "too light: $now"
 		exit
 	fi
-	new=`expr $now + 50`
+	new=`expr $now + $step`
 	echo $new >$config_file
 elif [[ $1 == "down" ]];then
-	if [[ $now -lt 100 ]];then
+	if [[ $now -lt 51 ]];then
 		echo "too dark: $now"
 		exit
 	fi
-	new=`expr $now - 50`
+	new=`expr $now - $step`
 	echo $new >$config_file
 fi
