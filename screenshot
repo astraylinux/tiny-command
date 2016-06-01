@@ -1,0 +1,8 @@
+#!/bin/bash
+
+dir=~/picture/screenshot/
+name=`date +"%Y%m%d_%H:%M:%S"`
+
+gnome-screenshot -ac
+
+gnome-screenshot -af ~/picture/screenshot/$name.png
