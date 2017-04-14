@@ -98,12 +98,14 @@ def trans(post_data, forword):
 		print query
 		print trstr
 
-
-	if jset["dict_result"]["baike_means"]:
-		print "="*30
-		baike = jset["dict_result"]["baike_means"]
-		print "encyc:", baike["content"]
-		print "elink:", baike["link"]
+	try:
+		if jset["dict_result"]["baike_means"]:
+			print "="*30
+			baike = jset["dict_result"]["baike_means"]
+			print "encyc:", baike["content"]
+			print "elink:", baike["link"]
+	except Exception, e:
+		pass
 
 	#try:
 	#	print json.dumps(jset, indent=4)
