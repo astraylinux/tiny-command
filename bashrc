@@ -21,6 +21,7 @@ DARK_GREEN="\[\e[36;1m\]"
 CLEAR="\[\e[0m\]"
 
 # some more ls aliases
+alias ls='ls --color'
 alias ll='ls -alFh|sort -h -k  5'
 alias la='ls -A'
 alias l='ls -CF'

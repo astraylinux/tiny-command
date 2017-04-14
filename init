@@ -6,7 +6,7 @@ echo "#!/bin/bash
 #enviroment config
 
 TINYPATH=$path
-PATH=\$PATH:\$TINYPATH:\$TINYPATH/nginx:\$TINYPATH/third-party/kprdbg:
+PATH=\$PATH:\$TINYPATH:\$TINYPATH/nginx:\$TINYPATH/third-party/kprdbg:\$TINYPATH/raspberry:
 
 export TINYPATH
 export PATH
