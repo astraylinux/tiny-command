@@ -106,7 +106,7 @@ TERM xterm-termite
 NORMAL 00;38;5;28 # no color code at all
 #FILE 00 # regular file: use no color at all
 RESET 0 # reset to "normal" color
-DIR 01;38;5;69 # directory 01;34
+DIR 01;38;5;33 # directory 01;34
 LINK 01;38;5;6 # symbolic link. (If you set this to 'target' instead of a
  # numerical value, the color is as for the file pointed to.)
 MULTIHARDLINK 00 # regular file with more than one link
@@ -120,14 +120,14 @@ SETUID 01;48;5;160;38;5;230 # file that is setuid (u+s)
 SETGID 01;48;5;136;38;5;230 # file that is setgid (g+s)
 CAPABILITY 30;41 # file with capability
 STICKY_OTHER_WRITABLE 01;48;5;233;38;5;230 # dir that is sticky and other-writable (+t,o+w)
-OTHER_WRITABLE 01;48;5;233;38;5;69 # dir that is other-writable (o+w) and not sticky
+OTHER_WRITABLE 01;48;5;233;38;5;33 # dir that is other-writable (o+w) and not sticky
 STICKY 48;5;233;38;5;230 # dir with the sticky bit set (+t) and not other-writable
 # This is for files with execute permission:
 EXEC 01;38;5;2
 
 .exe    01;38;5;160
 .py		01;38;5;3
-.php	01;38;5;2
+.php	01;38;5;247
 
 ## Archives or compressed (violet + bold for compression)
 .tar    01;38;5;1
@@ -308,3 +308,24 @@ EXEC 01;38;5;2
 .ogx 01;38;5;166
 
 
+# office file
+.doc	01;38;5;192
+.docx	01;38;5;192
+.docm	01;38;5;192
+.dotx	01;38;5;192
+.dotm	01;38;5;192
+.xls	01;38;5;192
+.xlsx	01;38;5;192
+.xlsm	01;38;5;192
+.xltx	01;38;5;192
+.xltm	01;38;5;192
+.xlsb	01;38;5;192
+.xlam	01;38;5;192
+.ppt	01;38;5;192
+.pptx	01;38;5;192
+.pptm	01;38;5;192
+.ppsx	01;38;5;192
+.ppsm	01;38;5;192
+.potx	01;38;5;192
+.potm	01;38;5;192
+.ppam	01;38;5;192
