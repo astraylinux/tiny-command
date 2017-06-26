@@ -97,7 +97,7 @@ export EDITOR=vim
 export TERM=xterm-256color
 
 ERROR="\`if [ \$? = 0 ]; then echo \$?; else echo \[\e[1\;31m\]\$?\[\e[0m\]; fi\`"
-FREE="$GREEN\$(free -m|grep 'cache:'|awk '{print \$4}')M$CLEAR"
+FREE="$GREEN\$(cat /proc/meminfo |grep MemAvailable|awk '{print int(\$2/1024)}')M$CLEAR"
 TIME="$YELLOW\$(date +'%H:%M:%S')$CLEAR"
 PS1="[ali@:$TIME:$FREE:\W]\$ "
 #PS1="[\u@ali:$TIME:$FREE:\W]\$ "
