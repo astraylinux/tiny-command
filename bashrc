@@ -102,9 +102,8 @@ TIME="$YELLOW\$(date +'%H:%M:%S')$CLEAR"
 PS1="[ali@:$TIME:$FREE:\W]\$ "
 #PS1="[\u@ali:$TIME:$FREE:\W]\$ "
 
+set -o vi
 
-#tiny command. by astraylinux
-source /root/git/tiny-command/tinybashrc
 
 
 

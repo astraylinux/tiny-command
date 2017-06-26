@@ -128,6 +128,7 @@ EXEC 01;38;5;2
 .exe    01;38;5;160
 .py		01;38;5;3
 .php	01;38;5;247
+.html	01;38;5;255
 
 ## Archives or compressed (violet + bold for compression)
 .tar    01;38;5;1
