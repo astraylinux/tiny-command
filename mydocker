@@ -1,0 +1,33 @@
+#!/bin/bash
+image_now=centos_zhl
+
+cid=$(sudo docker ps -l|grep $image_now|awk '{print $1}')
+pid=$(sudo docker inspect --format "{{ .State.Pid }}" $cid)
+echo "IMAGE: $image_now, container: $cid,  pid: $pid"
+
+case "$1" in
+    "run")
+        #= run: 后台运行常用镜像
+        sudo docker run -v /home/:/mnt -idt $image_now
+        ;;
+    "stop")
+        #= stop: 停止运行常用镜像
+        sudo docker stop $cid
+        ;;
+    "enter")
+        #= enter: 进入常用容器
+        sudo nsenter --target $pid --mount --uts --ipc --net --pid
+        ;;
+    "commit")
+        #= commit: 保存常用容器
+        sudo docker commit $cid $image_now
+        ;;
+#    "enter")
+#        #= 进入常用镜像
+#        ;;
+#    "enter")
+#        #= 进入常用镜像
+#        ;;
+    *)
+        cat $0 |grep '#='|grep -v grep|awk -F'#=' '{print $2}'
+esac
