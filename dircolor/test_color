@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ ! -e ./bashrc.bk ]];then
+	cp ~/.bashrc ./bashrc.bk
+fi
+
+
+echo "alias ls='ls --color=auto'" > ~/.bashrc
+echo "alias tcolor='source ~/.bashrc; ls ~/;ls ~/bin/; ls ~/git/pylib/;ls ~/download/pkg/;ls ~/tmp/'" >> ~/.bashrc
+dircolors .dircolors >> ~/.bashrc
+source ~/.bashrc

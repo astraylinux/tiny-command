@@ -1,0 +1,30 @@
+#开始 inputrc
+
+set editing-mode vi
+
+set show-all-if-ambiguous on
+
+#可以在 echo A的时候按了<TAB>后就能由readline给你补出来, 补全忽略大小写
+set completion-ignore-case on
+
+#允许向终端输出输入中文
+set output-meta on
+set input-meta on
+
+#none , visible, audible
+set bell-style none
+
+#禁止第8位（最高位）剔除, 不将中文字符转化为转义序列
+set convert-meta off
+
+#允许8bit输入, 允许输入中文
+set meta-flag on
+
+#======================= 定义快捷键
+"\C-l": clear-screen
+"\C-n": next-history
+"\C-p": previous-history
+"\C-a": beginning-of-line
+"\C-e": end-of-line
+"\C-f": forward-char
+"\C-b": backward-char
