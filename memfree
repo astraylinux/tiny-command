@@ -1,0 +1,15 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+free = 0
+meminfo = open("/proc/meminfo").read()
+
+if "MemAvailable:" in meminfo:
+    free = meminfo.split("MemAvailable:")[1].split(" kB")[0].strip()
+elif "MemFree:" in meminfo and "Buffers:" in meminfo and "Cached:" in meminfo:
+    memfree = meminfo.split("MemFree:")[1].split(" kB")[0].strip()
+    buffers = meminfo.split("Buffers:")[1].split(" kB")[0].strip()
+    cached = meminfo.split("Cached:")[1].split(" kB")[0].strip()
+    free = int(memfree) + int(buffers) + int(cached)
+
+print "%dMb"%(int(free)/1024)
