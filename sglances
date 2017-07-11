@@ -1,0 +1,3 @@
+#!/bin/bash
+
+glances -t 2 --disable-alert --fs-free-space --process-short-name
