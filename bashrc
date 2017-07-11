@@ -99,8 +99,8 @@ export TERM=xterm-256color
 ERROR="\`if [ \$? = 0 ]; then echo \$?; else echo \[\e[1\;31m\]\$?\[\e[0m\]; fi\`"
 FREE="$GREEN\$(memfree)$CLEAR"
 TIME="$YELLOW\$(date +'%H:%M:%S')$CLEAR"
-PS1="[ali@:$TIME:$FREE:\W]\$ "
-#PS1="[\u@ali:$TIME:$FREE:\W]\$ "
+mflag="It's new. You must change this flag"
+PS1="[$RED$mflag$CLEAR@:$CPUTEMP°c:$TIME:$FREE:\W]\$ "
 
 set -o vi
 
