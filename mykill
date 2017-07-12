@@ -1,0 +1,6 @@
+#!/bin/bash
+
+ps ax|grep --color "$1"
+kill -9 `ps ax|grep "$1"|grep -v 'mykill'|grep -v grep|awk '{print $1}'`
+echo "================================================================================ After"
+ps ax|grep --color "$1"
