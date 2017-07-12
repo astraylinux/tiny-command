@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#安装软件
+yum install vim git python-setuptools gcc autoconf automake autoconf213 unzip ncdu
+#开发常用包
+yum install pcre-devel xz-devel libpcap-devel glib2-devel ncurses-devel
+#编译安装package
+iftop  ag  proxychains4
+#python软件
+yum install python-devel python2-pip
+easy_install shadowsocks virtualenv glances
