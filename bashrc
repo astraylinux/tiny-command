@@ -24,6 +24,7 @@ DARK_GREEN="\[\e[36;1m\]"
 CLEAR="\[\e[0m\]"
 
 # some more ls aliases
+#alias cp='cp -i'
 alias ls='ls --color'
 alias ll='ls -alFh|sort -h -k  5'
 alias la='ls -A'
@@ -35,13 +36,12 @@ alias zhcon='zhcon --utf8 --drv=auto'
 alias commquery='cat ~/.comm.dat |grep'
 alias aptf='cat ~/.apt.data |grep '
 alias dusort='du --max-depth=1 -h |sort -h'
-# User specific aliases and functions
 alias rscp='rsync -v -P -e ssh'
 alias rm='rm -i'
-#alias cp='cp -i'
 alias mv='mv -i'
 alias cdhet='cd /usr/local/hetb'
 alias grep='grep --color'
+alias dfg='df -h|grep -v none|grep -Ev "(udev|cgmfs|shm|cgroup|run|tmpfs)"'
 
 #PATH=$PATH:/home/astray/bin:/home/astray/bin/script
 #CDPATH=.:~
