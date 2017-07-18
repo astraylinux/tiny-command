@@ -1,0 +1,50 @@
+#!/bin/bash
+
+flag='redis-server'
+
+get_pid() {
+    pid=`ps ax|grep "$flag"|grep -v grep|awk '{print $1}'`
+    echo $pid
+}
+
+
+daemon_start() {
+    pid=`get_pid`
+    if [[ ! $pid ]]; then
+        redis-server /etc/redis.conf >>/data/redis/redis.log 2>>/data/redis/redis_error.log &
+
+        pid=`get_pid`
+        echo "Run as: $pid"
+    else
+        echo "Daemon already running: $pid"
+    fi
+}
+
+daemon_stop() {
+    pid=`get_pid`
+    if [[ $pid ]]; then
+       kill -9 $pid
+       echo "Stoped: $pid"
+    else
+        echo "Daemon not run."
+    fi
+}
+
+case "$1" in
+    start)
+        daemon_start
+        ;;
+
+    stop)
+        daemon_stop
+        ;;
+
+    restart)
+        daemon_stop
+        daemon_start
+        ;;
+
+    *)
+    echo "Usage: $0 {start|stop|restart}"
+esac
+

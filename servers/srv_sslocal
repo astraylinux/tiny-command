@@ -1,0 +1,49 @@
+#!/bin/bash
+
+flag='sslocal -c /etc/sslocal.json'
+
+get_pid() {
+    pid=`ps ax|grep "$flag"|grep -v grep|awk '{print $1}'`
+    echo $pid
+}
+
+daemon_start() {
+    pid=`get_pid`
+    if [[ ! $pid ]]; then
+        sslocal -c /etc/sslocal.json -d start >>/data/log/ss.log 2>>/data/log/ss_error.log
+
+        pid=`get_pid`
+        echo "Run as: $pid"
+    else
+        echo "Daemon already running: $pid"
+    fi
+}
+
+daemon_stop() {
+    pid=`get_pid`
+    if [[ $pid ]]; then
+       kill -9 $pid
+       echo "Stoped: $pid"
+    else
+        echo "Daemon not run."
+    fi
+}
+
+case "$1" in
+    start)
+        daemon_start
+        ;;
+
+    stop)
+        daemon_stop
+        ;;
+
+    restart)
+        daemon_stop
+        daemon_start
+        ;;
+
+    *)
+    echo "Usage: $0 {start|stop|restart}"
+esac
+
