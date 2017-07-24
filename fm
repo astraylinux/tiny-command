@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ $2 ]];then
+    find -type f -mmin $1 -mmin $2
+elif [[ $1 ]];then
+    find -type f -mmin $1
+fi
