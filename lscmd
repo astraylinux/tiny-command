@@ -2,6 +2,20 @@
 
 paths=${PATH//:/ }
 
+result=""
 for path in $paths;do
-	ls $path
+    if [[ $1 ]];then
+	    ret=`ls $path|grep $1`
+        if [[ $ret ]];then
+            echo "================================== $path"
+            echo $ret|awk -F ' ' '{for(i=1;i<=NF;i++)print $i}'|grep --color $1
+        fi
+    else
+        result=$result$(echo -n `ls $path|wc -l`)
+        result=$result$(echo "	$path")"@@@"
+    fi
 done
+
+if [[ ! $1 ]];then
+    echo $result|awk -F'@@@' '{for(i=1;i<=NF;i++)print $i}'|sort -nk 1|uniq
+fi
