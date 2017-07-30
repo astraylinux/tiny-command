@@ -1,0 +1,4 @@
+#!/bin/bash
+
+chown -R $1 *
+chgrp -R $1 *
