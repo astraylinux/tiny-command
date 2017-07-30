@@ -25,6 +25,7 @@ CLEAR="\[\e[0m\]"
 # some more ls aliases
 #alias cp='cp -i'
 alias ls='ls --color'
+alias lss='du -hs *|sort -h'
 alias ll='ls -alFh|sort -h -k  5'
 alias la='ls -A'
 alias l='ls -CF'
@@ -41,6 +42,7 @@ alias mv='mv -i'
 alias cdhet='cd /usr/local/hetb'
 alias grep='grep --color'
 alias dfg='df -h|grep -v none|grep -Ev "(udev|cgmfs|shm|cgroup|run|tmpfs)"'
+alias fm='find -type f -mmin'
 
 #PATH=$PATH:/home/astray/bin:/home/astray/bin/script
 #CDPATH=.:~
