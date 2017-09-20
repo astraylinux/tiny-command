@@ -1,7 +1,12 @@
 #!/bin/bash
 
 if [[ $2 ]];then
-    ls --color -hl `find -type f -mmin $1 -mmin $2 |grep -v "\.git"`
+    cmd="find -type f -mmin $1 -mmin $2"
 elif [[ $1 ]];then
-    ls --color -hl `find -type f -mmin $1|grep -v "\.git"`
+    cmd="find -type f -mmin $1"
+fi
+
+result=`$cmd |grep -vE '\.git|\.pyc'`
+if [[ $result ]];then
+    ls --color -hl $result
 fi
