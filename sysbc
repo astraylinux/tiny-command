@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+#用sysbench进行常规性能测试
+echo "================================  CPU"
+threads=`cat /proc/cpuinfo |grep processor|wc -l`
+echo "CPU型号   :" `cat /proc/cpuinfo |grep 'model name'|head -n 1|awk -F': ' '{print $2}'`
+echo "CPU线程数 :" $threads
+echo "1.1 单线程测试:"
+sysbench --test=cpu --cpu-max-prime=20000 --num-threads=1 run|grep 'total time'
+echo "1.2 多线程测试:"
+sysbench --test=cpu --cpu-max-prime=20000 --num-threads=$threads run|grep 'total time'
