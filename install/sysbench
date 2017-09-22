@@ -1,0 +1,13 @@
+#!/bin/bash
+
+ver=`cat /proc/version`
+
+if [[ `echo $ver|grep 'Ubuntu'` ]];then
+    curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.deb.sh | sudo bash
+    sudo apt -y install sysbench
+fi
+
+if [[ `echo $ver|grep 'Red Hat'` ]];then
+    curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.rpm.sh | sudo bash
+    sudo yum -y install sysbench
+fi
