@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#Linode
+ln=172.104.82.198
+#Letbox
+lb=185.215.224.237
+ip=$ln
+
+if [[ $1 == "lb" ]];then
+    ip=$lb
+fi
+
+scp root@$ip:/net.tar.gz /tmp/
