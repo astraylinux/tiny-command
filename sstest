@@ -1,13 +1,26 @@
 #!/bin/bash
 
-#Linode
+
+
+c_ln="Linode" # Tokyo centos"
 ln=172.104.82.198
-#Letbox
+c_lb="Letbox" #Los Angeles, California"
 lb=185.215.224.237
 ip=$ln
+cm=$c_ln
 
 if [[ $1 == "lb" ]];then
     ip=$lb
+    cm=$c_lb
 fi
 
-scp root@$ip:/net.tar.gz /tmp/
+echo "=============================================================" $cm
+#ping
+ping -c 10 $ip
+echo ""
+
+#scp
+(time scp root@$ip:/net.tar.gz /tmp/) 2> /tmp/sstest_time 1>/dev/null
+t=`cat /tmp/sstest_time|grep real|awk -F'm' '{print $2}'|awk -F's' '{print $1}'`
+echo "Speed:" `bc <<< "636/$t"`"k/s"
+
