@@ -1,0 +1,120 @@
+#!/usr/bin/python
+#coding=utf8
+import urllib2
+import gzip
+import time
+import StringIO
+import sys
+import commands
+
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
+def de_gzip(data):
+    """decomporess data from gzip
+    """
+    cmps = StringIO.StringIO(data)
+    gzipper = gzip.GzipFile(fileobj=cmps)
+    return gzipper.read()
+
+def html_code(html):
+    pos = 0
+    try:
+        pos = html.index("charset=")
+        if pos == -1:
+            return False
+    except Exception, e:
+        return False
+    offset = html[pos:pos+20].index('"')
+    code = html[pos+8:pos+offset]
+    return code
+
+def html2utf8(html):
+    code = html_code(html)
+    if code:
+        html = html.decode(code, "ignore").encode('utf-8')
+        return html
+    return ""
+
+def get(url, heads={}):
+    fails = 0
+    html = ""
+    code = 200
+    time.sleep(0.05)
+    while True:
+        try:
+            if fails >= 3:
+                code = -1
+                break
+            request = urllib2.Request(url)
+            request.add_header("version", "HTTP/1.1")
+            request.add_header("User-Agent", "Mozilla/5.0 (Windows NT 6.1)\
+                    AppleWebKit/537.36 (KHTML,  like Gecko)\
+                    Chrome/28.0.1500.72 Safari/537.36")
+            request.add_header("Accept-Encoding", "identity")
+            for key in heads:
+                request.add_header(key, heads[key])
+            res_page = urllib2.urlopen(request, timeout=10)
+            code = res_page.getcode()
+            headerinfo = res_page.info()
+            if ("Content-Length" in headerinfo) and \
+                    int(headerinfo['Content-Length']) > 1048576:
+                code = 99
+                html = ""
+            else:
+                html = res_page.read()
+            if "Content-Encoding" in headerinfo and 'gzip' in headerinfo["Content-Encoding"]:
+                html = de_gzip(html)
+            break
+        except Exception, e:
+            print e, fails
+            time.sleep(0.3)
+            fails = fails + 1
+    return (code, html)
+
+url_head = "http://www.ip138.com/ips138.asp?ip="
+def get_ip_addr(ip):
+    url = url_head + ip
+    (code, html) = get(url)
+    if code == 200:
+        html = html2utf8(html)
+        html = html[html.index("<h1>"):html.index("<a href=\"ip_add.asp?ip=")]
+        sp = html.split("li>")
+        result = []
+        for info in sp[1::2]:
+            result.append(info.replace("</", "").replace("本站数据：", "").replace("参考数据", "").replace("  ", " "))
+        return result
+    else:
+        return ["Error"]
+
+def ip_check(check_str):
+    items = check_str.split('.')
+    return len(items) == 4 and len(filter(lambda x: x >= 0 and x <= 255, \
+        map(int, filter(lambda x: x.isdigit(), items)))) == 4
+
+#============================================= main
+if not len(sys.argv) > 1:
+    print "Argument error!"
+    exit()
+
+mtr_ip = sys.argv[1]
+print "mtr -rw %s"%(mtr_ip)
+(status, output) = commands.getstatusoutput("mtr -rw %s"%(mtr_ip))
+if status != 0:
+    print output
+    exit()
+
+lines = output.split("\n")
+for line in lines:
+    if "Start" in line or "HOST" in line:
+        print line
+        continue
+
+    sline = line.strip()
+    ip = sline.split(' ')[1]
+
+    if not ip_check(ip):
+        print line
+        continue
+
+    print line, "  （" +  "） （".join(get_ip_addr(ip)) + "）"
