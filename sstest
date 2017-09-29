@@ -3,7 +3,7 @@
 
 
 c_ln="Linode" # Tokyo centos"
-ln=139.162.74.15
+ln=172.104.82.105
 c_lb="Letbox" #Los Angeles, California"
 lb=185.215.224.237
 ip=$ln
