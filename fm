@@ -6,7 +6,7 @@ elif [[ $1 ]];then
     cmd="find -type f -mmin $1"
 fi
 
-result=`$cmd |grep -vE '\.git|\.pyc'`
+result=`$cmd |grep -vE '\.git|\.pyc|\.swp'`
 if [[ $result ]];then
     ls --color -hl $result
 fi
