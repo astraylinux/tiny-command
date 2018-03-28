@@ -40,7 +40,7 @@ if [[ ! `which ag` ]]; then
     cd ag
     ./build.sh
     sudo make install
-    ln `which ag` /usr/bin
+    ln -s /usr/local/bin/ag /usr/bin/
 fi
 
 # 安装proxychains命令
