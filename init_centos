@@ -1,13 +1,12 @@
 #!/bin/bash
 
-path=`pwd`
-
 # yum 安装依赖软件
 if [[ `which yum` ]]; then
     echo "================================== yum安装依赖"
     rpmdb --rebuilddb
     yum install -y curl wget tar gcc zlib-devel openssl openssl-devel \
-        bzip2-devel git tar
+        bzip2-devel git tar pcre-devel xz-devel automake unzip ncurses-devel \
+        libpcap-devel glib2-devel python-devel
     yum clean all
 fi
 
@@ -26,31 +25,42 @@ if [[ ! `which pip` ]]; then
     pip install --upgrade pip
 fi
 
+# 安装ncdu
 if [[ ! `which ncdu` ]]; then
+    echo "================================== 安装 ncdu"
     rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
     yum install -y ncdu
 fi
 
+# 安装ag命令
+if [[ ! `which ag` ]]; then
+    echo "================================== 安装 the_silver_searcher"
+    cd /tmp/
+    git clone https://github.com/ggreer/the_silver_searcher.git ./ag
+    cd ag
+    ./build.sh
+    sudo make install
+fi
+
+# 安装proxychains命令
+if [[ ! `which proxychains4` ]]; then
+    echo "================================== 安装 proxychains"
+    cd /tmp/
+    git clone https://github.com/rofl0r/proxychains-ng proxychains
+    cd proxychains
+    ./configure --prefix=/usr --sysconfdir=/etc
+    make
+    make install
+    make install-config
+    cd .. && rm -rf proxychains
+fi
+
+# 其他python命令
 which glances || pip install Glances
 
-cd $path
 
-echo "#!/bin/bash
-#enviroment config
 
-TINYPATH=$path
-PATH=\$PATH:\$TINYPATH:\$TINYPATH/nginx:\$TINYPATH/third-party/kprdbg:\$TINYPATH/raspberry:
 
-export TINYPATH
-export PATH
-"> tinybashrc
 
-cp ./bashrc ~/.bashrc
-cp ./inputrc ~/.inputrc
 
-check=`cat ~/.bashrc|grep tinybashrc`
-if [[ ! $check ]];then
-	echo "" >>~/.bashrc
-	echo "#tiny command. by astraylinux" >>~/.bashrc
-	echo "source $path/tinybashrc" >>~/.bashrc
-fi
+
