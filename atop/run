@@ -1,0 +1,24 @@
+#!/bin/bash
+
+logdir=./logs
+
+day=`date +'%Y%m%d'`
+hour=`date +'%H'`
+dir=$logdir/$day
+
+test -d $dir || mkdir $dir
+atop -w $dir/$hour 10 360
+
+# 每天1点删除7天前的日志,log目录不要放其他文件
+if [[ $hour == "01" ]];then
+    cd $logdir
+    lines=`ls|wc -l`
+    if [[ $lines -gt 7 ]];then
+        delnum=$((lines-7))
+        files=`ls|head -n $delnum`
+        rm -rf $files
+    fi
+    echo -n "===================="
+    date
+    echo "delete: $files"
+fi
