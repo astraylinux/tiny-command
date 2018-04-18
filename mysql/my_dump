@@ -1,0 +1,49 @@
+#!/bin/bash
+
+port=3306
+user=root
+host=127.0.0.1
+pw=''
+
+while true ; do
+    if [[ $# > 0 ]];then
+        if [[ $1 == "-P" ]]; then
+            shift
+            port=$1
+            shift
+        elif [[ $1 == "-h" ]];then
+            shift
+            host=$1
+            shift
+        elif [[ $1 == "-u" ]];then
+            shift
+            user=$1
+            shift
+        elif [[ $1 == "-p" ]];then
+            shift
+            pw=$1
+            shift
+        elif [[ $1 == "-d" ]];then
+            shift
+            dbname=$1
+            shift
+        fi
+    else
+        break
+    fi
+done
+
+if [[ $pw ]];then
+    pw="-p$pw"
+fi
+
+if [[ $dbname ]];then
+    mysqldump -u$user -P$port -h$host $pw $dbname > $dbname
+else
+    dbs=`mysql -u$user -P$port -h$host $pw -e'show databases'|grep -vE 'information_schema|performance_schema|mysql|sys|Database'`
+    echo $dbs
+    for db in $dbs; do
+        echo $db
+        mysqldump -u$user -P$port -h$host $pw $db >$db
+    done
+fi
