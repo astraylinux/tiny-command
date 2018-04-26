@@ -30,6 +30,12 @@ GPE="\033[45m"
 GSB="\033[46m"
 GWI="\033[47m"
 
+SELECT=$RD
+log() {
+    echo -e $SELECT
+    echo -e $@
+    echo -e $CL
+}
 
 echo -e "BL:$BL 黑色字 $CL"
 echo -e "RD:$RD 红色字 $CL"
@@ -47,7 +53,7 @@ echo -e "BBU:$BBU 蓝色字 $CL"
 echo -e "BPE:$BPE 紫色字 $CL"
 echo -e "BSB:$BSB 天蓝字 $CL"
 echo -e "BWI:$BWI 白色字 $CL"
-echo -e "GBL:$GBL 黑底 $CL" 
+echo -e "GBL:$GBL 黑底 $CL"
 echo -e "GRD:$GRD 红底 $CL"
 echo -e "GGR:$GGR 绿底 $CL"
 echo -e "GYE:$GYE 黄底 $CL"
