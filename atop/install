@@ -1,0 +1,32 @@
+#!/bin/bash
+
+echo "请将本atop目录放到/data/目录下"
+if [[ `pwd` != "/data/atop" ]];then
+    exit
+fi
+yum -y install atop
+
+echo "创建目录"
+mkdir tmp logs
+cd tmp
+
+echo "请下载好对应的内核版本，放到本/data/atop/tmp目录里"
+read
+
+echo "复制内核源码包"
+rpm2cpio ./*.rpm|cpio -idm
+cp -r ./usr /
+
+# 注意内核版本，如果大于3.17或小于3.10，不能用这个
+echo "下载安装netatop依赖"
+wget https://www.atoptool.nl/download/netatop-0.3.tar.gz
+tar xzf netatop-0.3.tar.gz
+cd netatop-0.3.tar.gz
+make
+make install
+service netatop start
+
+echo ""
+echo "请添加crontab"
+echo "# 每十秒记录一次atop日志，保存七天(一次运行一小时）"
+echo "0 * * * * cd /data/atop/; ./run >>./cron.log 2>&1"
