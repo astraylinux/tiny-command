@@ -33,7 +33,7 @@ GWI="\033[47m"
 SELECT=$RD
 log() {
     echo -en $SELECT
-    echo -e $@
+    echo -e "$@"
     echo -en $CL
 }
 
