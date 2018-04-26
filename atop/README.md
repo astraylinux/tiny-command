@@ -8,6 +8,7 @@ yum -y install atop
 
 ### 2. 安装netatop
 如果要使用网络监控的部分要安装netatop, 查看内核版本，在https://www.atoptool.nl/downloadnetatop.php 下载对应的版本。编译时需要对应内核版本的开发库，很多centos系统里没有对应的开发库（版本不一致）。例如: centos7.2的`kernel-devel-3.10.0-327.22.2.el7.x86_64.rpm`，Google上可以找到，解压后放到对应的目录。然后编译安装netatop就可以了。
+[centos内核ftp](ftp://ftp.riken.jp/Linux/cern/centos/7/updates/x86_64/repoview/kernel-devel.html)这个ftp有大部分的内核源码包
 
 ```
 rpm2cpio ./kernel-devel-3.10.0-327.22.2.el7.x86_64.rpm |cpio -idm
