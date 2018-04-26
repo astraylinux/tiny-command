@@ -32,9 +32,9 @@ GWI="\033[47m"
 
 SELECT=$RD
 log() {
-    echo -e $SELECT
+    echo -en $SELECT
     echo -e $@
-    echo -e $CL
+    echo -en $CL
 }
 
 echo -e "BL:$BL 黑色字 $CL"
