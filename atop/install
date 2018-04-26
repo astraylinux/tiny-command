@@ -21,7 +21,7 @@ cp -r ./usr /
 echo "下载安装netatop依赖"
 wget https://www.atoptool.nl/download/netatop-0.3.tar.gz
 tar xzf netatop-0.3.tar.gz
-cd netatop-0.3.tar.gz
+cd netatop-0.3
 make
 make install
 service netatop start
