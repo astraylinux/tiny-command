@@ -2,10 +2,10 @@
 
 
 if [[ $1 ]];then
-	cd $TINYPATH/install
+	cd $TINYPATH/tinyinstalls
 	./$1 install
 else
-	cd $TINYPATH/install
+	cd $TINYPATH/tinyinstalls
 	ls 
 fi
 

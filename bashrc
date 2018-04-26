@@ -42,8 +42,7 @@ alias mv='mv -i'
 alias cdhet='cd /usr/local/hetb'
 alias grep='grep --color'
 alias dfg='df -h|grep -v none|grep -Ev "(udev|cgmfs|shm|cgroup|run|tmpfs)"'
-alias fm='find -type f -mmin'
-alias du='ncdu'
+alias cy='cd ~/workspace/yomojoy'
 
 #PATH=$PATH:/home/astray/bin:/home/astray/bin/script
 #CDPATH=.:~
