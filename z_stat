@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#简单显示服务器的负载情况（内存/硬盘/cpu负载）
+
 memfree=`memfree`
 memfree=${memfree%M*}
 memtotal=`free -m|grep 'Mem'|awk '{print $2}'`
