@@ -1,0 +1,22 @@
+#!/bin/bash
+
+memfree=`memfree`
+memfree=${memfree%M*}
+memtotal=`free -m|grep 'Mem'|awk '{print $2}'`
+
+hd_info=`df -h|grep -v 'Size'|head -n 1`
+hd_free=`echo $hd_info|awk '{print $4}'`
+hd_free=${hd_free%G*}
+hd_total=`echo $hd_info|awk '{print $2}'`
+hd_total=${hd_total%G*}
+hd_rate=`echo $hd_info|awk '{print $5}'`
+hd_total=${hd_total%\%*}
+
+load_info=`top -bn 1|grep 'load average'|awk -F'load average' '{print $2}'|awk -F':' '{print $2}'`
+load_info=`echo $load_info|sed 's/,//g'`
+
+cpu_core=`cat /proc/cpuinfo|grep 'processor'|wc -l`
+
+echo "$memfree $memtotal $hd_free $hd_total $hd_rate $cpu_core $load_info "
+
+
