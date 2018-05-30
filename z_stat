@@ -6,7 +6,7 @@ memfree=`memfree`
 memfree=${memfree%M*}
 memtotal=`free -m|grep 'Mem'|awk '{print $2}'`
 
-hd_info=`df -h|grep -v 'Size'|head -n 1`
+hd_info=`df -h|grep -vE 'Size|容量'|head -n 1`
 hd_free=`echo $hd_info|awk '{print $4}'`
 hd_free=${hd_free%G*}
 hd_total=`echo $hd_info|awk '{print $2}'`
